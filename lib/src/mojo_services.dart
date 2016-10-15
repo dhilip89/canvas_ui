@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// Mojo handles provided to the application at startup.
 ///
 /// The application can take ownership of these handles by calling the static
@@ -10,9 +12,9 @@
 class MojoServices {
   MojoServices._();
 
-  static int takeRootBundle() native "MojoServices_takeRootBundle";
-  static int takeIncomingServices() native "MojoServices_takeIncomingServices";
-  static int takeOutgoingServices() native "MojoServices_takeOutgoingServices";
-  static int takeShell() native "MojoServices_takeShell";
-  static int takeViewServices() native "MojoServices_takeViewServices";
+  static int takeRootBundle() => throw new UnimplementedError();
+  static int takeIncomingServices() => throw new UnimplementedError();
+  static int takeOutgoingServices() => throw new UnimplementedError();
+  static int takeShell() => throw new UnimplementedError();
+  static int takeViewServices() => throw new UnimplementedError();
 }

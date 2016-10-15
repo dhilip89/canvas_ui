@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 Color _scaleAlpha(Color a, double factor) {
   return a.withAlpha((a.alpha * factor).round());
 }
@@ -560,14 +562,14 @@ class Paint {
 /// [drawImage].
 abstract class Image {
   /// The number of image pixels along the image's horizontal axis.
-  int get width native "Image_width";
+  int get width => throw new UnimplementedError();
 
   /// The number of image pixels along the image's vertical axis.
-  int get height native "Image_height";
+  int get height => throw new UnimplementedError();
 
   /// Release the resources used by this object. The object is no longer usable
   /// after this method is called.
-  void dispose() native "Image_dispose";
+  void dispose() => throw new UnimplementedError();
 
   @override
   String toString() => '[$width\u00D7$height]';
@@ -577,12 +579,12 @@ abstract class Image {
 typedef void ImageDecoderCallback(Image result);
 
 /// Convert an image file from a mojo pipe into an [Image] object.
-void decodeImageFromDataPipe(int handle, ImageDecoderCallback callback)
-    native "decodeImageFromDataPipe";
+void decodeImageFromDataPipe(int handle, ImageDecoderCallback callback) =>
+    throw new UnimplementedError();
 
 /// Convert an image file from a byte array into an [Image] object.
-void decodeImageFromList(Uint8List list, ImageDecoderCallback callback)
-    native "decodeImageFromList";
+void decodeImageFromList(Uint8List list, ImageDecoderCallback callback) =>
+    throw new UnimplementedError();
 
 /// Determines how the interior of a [Path] is calculated.
 enum PathFillType {
@@ -617,62 +619,64 @@ class Path {
   Path() {
     _constructor();
   }
-  void _constructor() native "Path_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// Determines how the interior of this path is calculated.
   PathFillType get fillType => PathFillType.values[_getFillType()];
   set fillType(PathFillType value) => _setFillType(value.index);
 
-  int _getFillType() native "Path_getFillType";
-  void _setFillType(int fillType) native "Path_setFillType";
+  int _getFillType() => throw new UnimplementedError();
+  void _setFillType(int fillType) => throw new UnimplementedError();
 
   /// Starts a new subpath at the given coordinate.
-  void moveTo(double x, double y) native "Path_moveTo";
+  void moveTo(double x, double y) => throw new UnimplementedError();
 
   /// Starts a new subpath at the given offset from the current point.
-  void relativeMoveTo(double dx, double dy) native "Path_relativeMoveTo";
+  void relativeMoveTo(double dx, double dy) => throw new UnimplementedError();
 
   /// Adds a straight line segment from the current point to the given
   /// point.
-  void lineTo(double x, double y) native "Path_lineTo";
+  void lineTo(double x, double y) => throw new UnimplementedError();
 
   /// Adds a straight line segment from the current point to the point
   /// at the given offset from the current point.
-  void relativeLineTo(double dx, double dy) native "Path_relativeLineTo";
+  void relativeLineTo(double dx, double dy) => throw new UnimplementedError();
 
   /// Adds a quadratic bezier segment that curves from the current
   /// point to the given point (x2,y2), using the control point
   /// (x1,y1).
-  void quadraticBezierTo(double x1, double y1, double x2, double y2)
-      native "Path_quadraticBezierTo";
+  void quadraticBezierTo(double x1, double y1, double x2, double y2) =>
+      throw new UnimplementedError();
 
   /// Adds a quadratic bezier segment that curves from the current
   /// point to the point at the offset (x2,y2) from the current point,
   /// using the control point at the offset (x1,y1) from the current
   /// point.
-  void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2)
-      native "Path_relativeQuadraticBezierTo";
+  void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2) =>
+      throw new UnimplementedError();
 
   /// Adds a cubic bezier segment that curves from the current point
   /// to the given point (x3,y3), using the control points (x1,y1) and
   /// (x2,y2).
-  void cubicTo(double x1, double y1, double x2, double y2, double x3, double y3)
-      native "Path_cubicTo";
+  void cubicTo(
+          double x1, double y1, double x2, double y2, double x3, double y3) =>
+      throw new UnimplementedError();
 
   /// Adds a cubcic bezier segment that curves from the current point
   /// to the point at the offset (x3,y3) from the current point, using
   /// the control points at the offsets (x1,y1) and (x2,y2) from the
   /// current point.
-  void relativeCubicTo(double x1, double y1, double x2, double y2, double x3,
-      double y3) native "Path_relativeCubicTo";
+  void relativeCubicTo(
+          double x1, double y1, double x2, double y2, double x3, double y3) =>
+      throw new UnimplementedError();
 
   /// Adds a bezier segment that curves from the current point to the
   /// given point (x2,y2), using the control points (x1,y1) and the
   /// weight w. If the weight is greater than 1, then the curve is a
   /// hyperbola; if the weight equals 1, it's a parabola; and if it is
   /// less than 1, it is an ellipse.
-  void conicTo(double x1, double y1, double x2, double y2, double w)
-      native "Path_conicTo";
+  void conicTo(double x1, double y1, double x2, double y2, double w) =>
+      throw new UnimplementedError();
 
   /// Adds a bezier segment that curves from the current point to the
   /// point at the offset (x2,y2) from the current point, using the
@@ -680,8 +684,8 @@ class Path {
   /// the weight w. If the weight is greater than 1, then the curve is
   /// a hyperbola; if the weight equals 1, it's a parabola; and if it
   /// is less than 1, it is an ellipse.
-  void relativeConicTo(double x1, double y1, double x2, double y2, double w)
-      native "Path_relativeConicTo";
+  void relativeConicTo(double x1, double y1, double x2, double y2, double w) =>
+      throw new UnimplementedError();
 
   /// If the [forceMoveTo] argument is false, adds a straight line
   /// segment and an arc segment.
@@ -705,14 +709,9 @@ class Path {
         forceMoveTo);
   }
 
-  void _arcTo(
-      double left,
-      double top,
-      double right,
-      double bottom,
-      double startAngle,
-      double sweepAngle,
-      bool forceMoveTo) native "Path_arcTo";
+  void _arcTo(double left, double top, double right, double bottom,
+          double startAngle, double sweepAngle, bool forceMoveTo) =>
+      throw new UnimplementedError();
 
   /// Adds a new subpath that consists of four lines that outline the
   /// given rectangle.
@@ -720,8 +719,8 @@ class Path {
     _addRect(rect.left, rect.top, rect.right, rect.bottom);
   }
 
-  void _addRect(double left, double top, double right, double bottom)
-      native "Path_addRect";
+  void _addRect(double left, double top, double right, double bottom) =>
+      throw new UnimplementedError();
 
   /// Adds a new subpath that consists of a curve that forms the
   /// ellipse that fills the given rectangle.
@@ -729,8 +728,8 @@ class Path {
     _addOval(oval.left, oval.top, oval.right, oval.bottom);
   }
 
-  void _addOval(double left, double top, double right, double bottom)
-      native "Path_addOval";
+  void _addOval(double left, double top, double right, double bottom) =>
+      throw new UnimplementedError();
 
   /// Adds a new subpath with one arc segment that consists of the arc
   /// that follows the edge of the oval bounded by the given
@@ -746,7 +745,8 @@ class Path {
   }
 
   void _addArc(double left, double top, double right, double bottom,
-      double startAngle, double sweepAngle) native "Path_addArc";
+          double startAngle, double sweepAngle) =>
+      throw new UnimplementedError();
 
   /// Adds a new subpath with a sequence of line segments that connect the given
   /// points. If `close` is true, a final line segment will be added that
@@ -755,35 +755,37 @@ class Path {
     _addPolygon(_encodePointList(points), close);
   }
 
-  void _addPolygon(Float32List points, bool close) native "Path_addPolygon";
+  void _addPolygon(Float32List points, bool close) =>
+      throw new UnimplementedError();
 
   /// Adds a new subpath that consists of the straight lines and
   /// curves needed to form the rounded rectangle described by the
   /// argument.
   void addRRect(RRect rrect) => _addRRect(rrect._value);
-  void _addRRect(Float32List rrect) native "Path_addRRect";
+  void _addRRect(Float32List rrect) => throw new UnimplementedError();
 
   /// Adds a new subpath that consists of the given path offset by the given
   /// offset.
   void addPath(Path path, Offset offset) =>
       _addPath(path, offset.dx, offset.dy);
-  void _addPath(Path path, double dx, double dy) native "Path_addPath";
+  void _addPath(Path path, double dx, double dy) =>
+      throw new UnimplementedError();
 
   /// Adds the given path to this path by extending the current segment of this
   /// path with the the first segment of the given path.
   void extendWithPath(Path path, Offset offset) =>
       _extendWithPath(path, offset.dx, offset.dy);
-  void _extendWithPath(Path path, double dx, double dy)
-      native "Path_extendWithPath";
+  void _extendWithPath(Path path, double dx, double dy) =>
+      throw new UnimplementedError();
 
   /// Closes the last subpath, as if a straight line had been drawn
   /// from the current point to the first point of the subpath.
-  void close() native "Path_close";
+  void close() => throw new UnimplementedError();
 
   /// Clears the [Path] object of all subpaths, returning it to the
   /// same state it had when it was created. The _current point_ is
   /// reset to the origin.
-  void reset() native "Path_reset";
+  void reset() => throw new UnimplementedError();
 
   /// Tests to see if the point is within the path. (That is, whether
   /// the point would be in the visible portion of the path if the
@@ -791,12 +793,12 @@ class Path {
   ///
   /// Returns true if the point is in the path, and false otherwise.
   bool contains(Point position) => _contains(position.x, position.y);
-  bool _contains(double x, double y) native "Path_contains";
+  bool _contains(double x, double y) => throw new UnimplementedError();
 
   /// Returns a copy of the path with all the segments of every
   /// subpath translated by the given offset.
   Path shift(Offset offset) => _shift(offset.dx, offset.dy);
-  Path _shift(double dx, double dy) native "Path_shift";
+  Path _shift(double dx, double dy) => throw new UnimplementedError();
 
   /// Returns a copy of the path with all the segments of every
   /// subpath transformed by the given matrix.
@@ -806,7 +808,7 @@ class Path {
     return _transform(matrix4);
   }
 
-  Path _transform(Float64List matrix4) native "Path_transform";
+  Path _transform(Float64List matrix4) => throw new UnimplementedError();
 }
 
 /// Styles to use for blurs in [MaskFilter] objects.
@@ -867,8 +869,8 @@ class MaskFilter {
     _constructor(
         style.index, sigma, _makeBlurFlags(ignoreTransform, highQuality));
   }
-  void _constructor(int style, double sigma, int flags)
-      native "MaskFilter_constructor";
+  void _constructor(int style, double sigma, int flags) =>
+      throw new UnimplementedError();
 
   // Convert constructor parameters to the SkBlurMaskFilter::BlurFlags type.
   static int _makeBlurFlags(bool ignoreTransform, bool highQuality) {
@@ -921,7 +923,7 @@ class ColorFilter {
 ///
 /// See [SceneBuilder.pushBackdropFilter].
 class ImageFilter {
-  void _constructor() native "ImageFilter_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// A source filter containing an image.
   // ImageFilter.image({ Image image }) {
@@ -942,7 +944,8 @@ class ImageFilter {
     _constructor();
     _initBlur(sigmaX, sigmaY);
   }
-  void _initBlur(double sigmaX, double sigmaY) native "ImageFilter_initBlur";
+  void _initBlur(double sigmaX, double sigmaY) =>
+      throw new UnimplementedError();
 }
 
 /// Base class for objects such as [Gradient] and [ImageShader] which
@@ -991,7 +994,7 @@ class Gradient extends Shader {
   /// Use the [Gradient.linear] or [Gradient.radial] constructors to
   /// obtain a usable [Gradient] object.
   Gradient();
-  void _constructor() native "Gradient_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// Creates a linear gradient from `endPoint[0]` to `endPoint[1]`. If
   /// `colorStops` is provided, `colorStops[i]` is a number from 0 to 1 that
@@ -1014,7 +1017,8 @@ class Gradient extends Shader {
         endPointsBuffer, colorsBuffer, colorStopsBuffer, tileMode.index);
   }
   void _initLinear(Float32List endPoints, Int32List colors,
-      Float32List colorStops, int tileMode) native "Gradient_initLinear";
+          Float32List colorStops, int tileMode) =>
+      throw new UnimplementedError();
 
   /// Creates a radial gradient centered at `center` that ends at `radius`
   /// distance from the center. If `colorStops` is provided, `colorStops[i]` is
@@ -1032,13 +1036,9 @@ class Gradient extends Shader {
     _initRadial(center.x, center.y, radius, colorsBuffer, colorStopsBuffer,
         tileMode.index);
   }
-  void _initRadial(
-      double centerX,
-      double centerY,
-      double radius,
-      Int32List colors,
-      Float32List colorStops,
-      int tileMode) native "Gradient_initRadial";
+  void _initRadial(double centerX, double centerY, double radius,
+          Int32List colors, Float32List colorStops, int tileMode) =>
+      throw new UnimplementedError();
 
   static void _validateColorStops(List<Color> colors, List<double> colorStops) {
     if (colorStops != null && colors.length != colorStops.length)
@@ -1066,9 +1066,9 @@ class ImageShader extends Shader {
     _constructor();
     _initWithImage(image, tmx.index, tmy.index, matrix4);
   }
-  void _constructor() native "ImageShader_constructor";
-  void _initWithImage(Image image, int tmx, int tmy, Float64List matrix4)
-      native "ImageShader_initWithImage";
+  void _constructor() => throw new UnimplementedError();
+  void _initWithImage(Image image, int tmx, int tmy, Float64List matrix4) =>
+      throw new UnimplementedError();
 }
 
 /// Defines how a list of points is interpreted when drawing a set of triangles.
@@ -1155,12 +1155,13 @@ class Canvas {
         recorder, cullRect.left, cullRect.top, cullRect.right, cullRect.bottom);
   }
   void _constructor(PictureRecorder recorder, double left, double top,
-      double right, double bottom) native "Canvas_constructor";
+          double right, double bottom) =>
+      throw new UnimplementedError();
 
   /// Saves a copy of the current transform and clip on the save stack.
   ///
   /// Call [restore] to pop the save stack.
-  void save() native "Canvas_save";
+  void save() => throw new UnimplementedError();
 
   /// Saves a copy of the current transform and clip on the save stack, and then
   /// creates a new group which subsequent calls will become a part of. When the
@@ -1185,11 +1186,13 @@ class Canvas {
     }
   }
 
-  void _saveLayerWithoutBounds(List<dynamic> paintObjects, ByteData paintData)
-      native "Canvas_saveLayerWithoutBounds";
+  void _saveLayerWithoutBounds(
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
   // TODO(jackson): Paint should be optional, but making it optional causes crash
   void _saveLayer(double left, double top, double right, double bottom,
-      List<dynamic> paintObjects, ByteData paintData) native "Canvas_saveLayer";
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Pops the current save stack, if there is anything to pop.
   /// Otherwise, does nothing.
@@ -1198,7 +1201,7 @@ class Canvas {
   ///
   /// If the state was pushed with with [saveLayer], then this call will also
   /// cause the new layer to be composited into the previous layer.
-  void restore() native "Canvas_restore";
+  void restore() => throw new UnimplementedError();
 
   /// Returns the number of items on the save stack, including the
   /// initial state. This means it returns 1 for a clean canvas, and
@@ -1206,25 +1209,25 @@ class Canvas {
   /// each matching call to [restore] decrements it.
   ///
   /// This number cannot go below 1.
-  int getSaveCount() native "Canvas_getSaveCount";
+  int getSaveCount() => throw new UnimplementedError();
 
   /// Add a translation to the current transform, shifting the coordinate space
   /// horizontally by the first argument and vertically by the second argument.
-  void translate(double dx, double dy) native "Canvas_translate";
+  void translate(double dx, double dy) => throw new UnimplementedError();
 
   /// Add an axis-aligned scale to the current transform, scaling by the first
   /// argument in the horizontal direction and the second in the vertical
   /// direction.
-  void scale(double sx, double sy) native "Canvas_scale";
+  void scale(double sx, double sy) => throw new UnimplementedError();
 
   /// Add a rotation to the current transform. The argument is in radians clockwise.
-  void rotate(double radians) native "Canvas_rotate";
+  void rotate(double radians) => throw new UnimplementedError();
 
   /// Add an axis-aligned skew to the current transform, with the first argument
   /// being the horizontal skew in radians clockwise around the origin, and the
   /// second argument being the vertical skew in radians clockwise around the
   /// origin.
-  void skew(double sx, double sy) native "Canvas_skew";
+  void skew(double sx, double sy) => throw new UnimplementedError();
 
   /// Multiply the current transform by the specified 4⨉4 transformation matrix
   /// specified as a list of values in column-major order.
@@ -1234,7 +1237,7 @@ class Canvas {
     _transform(matrix4);
   }
 
-  void _transform(Float64List matrix4) native "Canvas_transform";
+  void _transform(Float64List matrix4) => throw new UnimplementedError();
 
   /// Replaces the current transform with the specified 4⨉4 transformation
   /// matrix specified as a list of values in column-major order.
@@ -1244,7 +1247,7 @@ class Canvas {
     _setMatrix(matrix4);
   }
 
-  void _setMatrix(Float64List matrix4) native "Canvas_setMatrix";
+  void _setMatrix(Float64List matrix4) => throw new UnimplementedError();
 
   /// Reduces the clip region to the intersection of the current clip and the
   /// given rectangle.
@@ -1252,17 +1255,17 @@ class Canvas {
     _clipRect(rect.left, rect.top, rect.right, rect.bottom);
   }
 
-  void _clipRect(double left, double top, double right, double bottom)
-      native "Canvas_clipRect";
+  void _clipRect(double left, double top, double right, double bottom) =>
+      throw new UnimplementedError();
 
   /// Reduces the clip region to the intersection of the current clip and the
   /// given rounded rectangle.
   void clipRRect(RRect rrect) => _clipRRect(rrect._value);
-  void _clipRRect(Float32List rrect) native "Canvas_clipRRect";
+  void _clipRRect(Float32List rrect) => throw new UnimplementedError();
 
   /// Reduces the clip region to the intersection of the current clip and the
   /// given [Path].
-  void clipPath(Path path) native "Canvas_clipPath";
+  void clipPath(Path path) => throw new UnimplementedError();
 
   /// Paints the given [Color] onto the canvas, applying the given
   /// [TransferMode], with the given color being the source and the background
@@ -1271,7 +1274,8 @@ class Canvas {
     _drawColor(color.value, transferMode.index);
   }
 
-  void _drawColor(int color, int transferMode) native "Canvas_drawColor";
+  void _drawColor(int color, int transferMode) =>
+      throw new UnimplementedError();
 
   /// Draws a line between the given [Point]s using the given paint. The line is
   /// stroked, the value of the [Paint.style] is ignored for this call.
@@ -1280,15 +1284,16 @@ class Canvas {
   }
 
   void _drawLine(double x1, double y1, double x2, double y2,
-      List<dynamic> paintObjects, ByteData paintData) native "Canvas_drawLine";
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Fills the canvas with the given [Paint].
   ///
   /// To fill the canvas with a solid color and transfer mode, consider
   /// [drawColor] instead.
   void drawPaint(Paint paint) => _drawPaint(paint._objects, paint._data);
-  void _drawPaint(List<dynamic> paintObjects, ByteData paintData)
-      native "Canvas_drawPaint";
+  void _drawPaint(List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws a rectangle with the given [Paint]. Whether the rectangle is filled
   /// or stroked (or both) is controlled by [Paint.style].
@@ -1298,7 +1303,8 @@ class Canvas {
   }
 
   void _drawRect(double left, double top, double right, double bottom,
-      List<dynamic> paintObjects, ByteData paintData) native "Canvas_drawRect";
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws a rounded rectangle with the given [Paint]. Whether the rectangle is
   /// filled or stroked (or both) is controlled by [Paint.style].
@@ -1306,8 +1312,9 @@ class Canvas {
     _drawRRect(rrect._value, paint._objects, paint._data);
   }
 
-  void _drawRRect(Float32List rrect, List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawRRect";
+  void _drawRRect(
+          Float32List rrect, List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws a shape consisting of the difference between two rounded rectangles
   /// with the given [Paint]. Whether this shape is filled or stroked (or both)
@@ -1318,11 +1325,9 @@ class Canvas {
     _drawDRRect(outer._value, inner._value, paint._objects, paint._data);
   }
 
-  void _drawDRRect(
-      Float32List outer,
-      Float32List inner,
-      List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawDRRect";
+  void _drawDRRect(Float32List outer, Float32List inner,
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws an axis-aligned oval that fills the given axis-aligned rectangle
   /// with the given [Paint]. Whether the oval is filled or stroked (or both) is
@@ -1333,7 +1338,8 @@ class Canvas {
   }
 
   void _drawOval(double left, double top, double right, double bottom,
-      List<dynamic> paintObjects, ByteData paintData) native "Canvas_drawOval";
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws a circle centered at the point given by the first two arguments and
   /// that has the radius given by the third argument, with the [Paint] given in
@@ -1343,12 +1349,9 @@ class Canvas {
     _drawCircle(c.x, c.y, radius, paint._objects, paint._data);
   }
 
-  void _drawCircle(
-      double x,
-      double y,
-      double radius,
-      List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawCircle";
+  void _drawCircle(double x, double y, double radius,
+          List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draw an arc scaled to fit inside the given rectangle. It starts from
   /// startAngle radians around the oval up to startAngle + sweepAngle
@@ -1367,15 +1370,16 @@ class Canvas {
   }
 
   void _drawArc(
-      double left,
-      double top,
-      double right,
-      double bottom,
-      double startAngle,
-      double sweepAngle,
-      bool useCenter,
-      List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawArc";
+          double left,
+          double top,
+          double right,
+          double bottom,
+          double startAngle,
+          double sweepAngle,
+          bool useCenter,
+          List<dynamic> paintObjects,
+          ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws the given [Path] with the given [Paint]. Whether this shape is
   /// filled or stroked (or both) is controlled by [Paint.style]. If the path is
@@ -1384,8 +1388,8 @@ class Canvas {
     _drawPath(path, paint._objects, paint._data);
   }
 
-  void _drawPath(Path path, List<dynamic> paintObjects, ByteData paintData)
-      native "Canvas_drawPath";
+  void _drawPath(Path path, List<dynamic> paintObjects, ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws the given [Image] into the canvas with its top-left corner at the
   /// given [Point]. The image is composited into the canvas using the given [Paint].
@@ -1394,7 +1398,8 @@ class Canvas {
   }
 
   void _drawImage(Image image, double x, double y, List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawImage";
+          ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws the subset of the given image described by the `src` argument into
   /// the canvas in the axis-aligned rectangle given by the `dst` argument.
@@ -1407,17 +1412,18 @@ class Canvas {
   }
 
   void _drawImageRect(
-      Image image,
-      double srcLeft,
-      double srcTop,
-      double srcRight,
-      double srcBottom,
-      double dstLeft,
-      double dstTop,
-      double dstRight,
-      double dstBottom,
-      List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawImageRect";
+          Image image,
+          double srcLeft,
+          double srcTop,
+          double srcRight,
+          double srcBottom,
+          double dstLeft,
+          double dstTop,
+          double dstRight,
+          double dstBottom,
+          List<dynamic> paintObjects,
+          ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draws the given [Image] into the canvas using the given [Paint].
   ///
@@ -1438,21 +1444,22 @@ class Canvas {
   }
 
   void _drawImageNine(
-      Image image,
-      double centerLeft,
-      double centerTop,
-      double centerRight,
-      double centerBottom,
-      double dstLeft,
-      double dstTop,
-      double dstRight,
-      double dstBottom,
-      List<dynamic> paintObjects,
-      ByteData paintData) native "Canvas_drawImageNine";
+          Image image,
+          double centerLeft,
+          double centerTop,
+          double centerRight,
+          double centerBottom,
+          double dstLeft,
+          double dstTop,
+          double dstRight,
+          double dstBottom,
+          List<dynamic> paintObjects,
+          ByteData paintData) =>
+      throw new UnimplementedError();
 
   /// Draw the given picture onto the canvas. To create a picture, see
   /// [PictureRecorder].
-  void drawPicture(Picture picture) native "Canvas_drawPicture";
+  void drawPicture(Picture picture) => throw new UnimplementedError();
 
   /// Draws the text in the given paragraph into this canvas at the given offset.
   ///
@@ -1468,7 +1475,8 @@ class Canvas {
   }
 
   void _drawPoints(List<dynamic> paintObjects, ByteData paintData,
-      int pointMode, Float32List points) native "Canvas_drawPoints";
+          int pointMode, Float32List points) =>
+      throw new UnimplementedError();
 
   void drawVertices(
       VertexMode vertexMode,
@@ -1500,14 +1508,15 @@ class Canvas {
   }
 
   void _drawVertices(
-      List<dynamic> paintObjects,
-      ByteData paintData,
-      int vertexMode,
-      Float32List vertices,
-      Float32List textureCoordinates,
-      Int32List colors,
-      int transferMode,
-      Int32List indicies) native "Canvas_drawVertices";
+          List<dynamic> paintObjects,
+          ByteData paintData,
+          int vertexMode,
+          Float32List vertices,
+          Float32List textureCoordinates,
+          Int32List colors,
+          int transferMode,
+          Int32List indicies) =>
+      throw new UnimplementedError();
 
   // TODO(eseidel): Paint should be optional, but optional doesn't work.
   void drawAtlas(
@@ -1555,14 +1564,15 @@ class Canvas {
   }
 
   void _drawAtlas(
-      List<dynamic> paintObjects,
-      ByteData paintData,
-      Image atlas,
-      Float32List rstTransforms,
-      Float32List rects,
-      Int32List colors,
-      int transferMode,
-      Float32List cullRect) native "Canvas_drawAtlas";
+          List<dynamic> paintObjects,
+          ByteData paintData,
+          Image atlas,
+          Float32List rstTransforms,
+          Float32List rects,
+          Int32List colors,
+          int transferMode,
+          Float32List cullRect) =>
+      throw new UnimplementedError();
 }
 
 /// An object representing a sequence of recorded graphical operations.
@@ -1581,7 +1591,7 @@ abstract class Picture {
 
   /// Release the resources used by this object. The object is no longer usable
   /// after this method is called.
-  void dispose() native "Picture_dispose";
+  void dispose() => throw new UnimplementedError();
 }
 
 /// Records a [Picture] containing a sequence of graphical operations.
@@ -1595,7 +1605,7 @@ class PictureRecorder {
   PictureRecorder() {
     _constructor();
   }
-  void _constructor() native "PictureRecorder_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// Whether this object is currently recording commands.
   ///
@@ -1604,7 +1614,7 @@ class PictureRecorder {
   /// call to [endRecording], and false if either this
   /// [PictureRecorder] has not yet been associated with a [Canvas],
   /// or the [endRecording] method has already been called.
-  bool get isRecording native "PictureRecorder_isRecording";
+  bool get isRecording => throw new UnimplementedError();
 
   /// Finishes recording graphical operations.
   ///
@@ -1613,5 +1623,5 @@ class PictureRecorder {
   /// and the canvas objects are invalid and cannot be used further.
   ///
   /// Returns null if the PictureRecorder is not associated with a canvas.
-  Picture endRecording() native "PictureRecorder_endRecording";
+  Picture endRecording() => throw new UnimplementedError();
 }

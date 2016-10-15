@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// Linearly interpolate between two numbers.
 double lerpDouble(num a, num b, double t) {
   if (a == null && b == null) return null;

@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// The possible actions that can be conveyed from the operating system
 /// accessibility APIs to a semantics node.
 class SemanticsAction {
@@ -169,7 +171,7 @@ class SemanticsUpdateBuilder {
   SemanticsUpdateBuilder() {
     _constructor();
   }
-  void _constructor() native "SemanticsUpdateBuilder_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// Update the information associated with the node with the given `id`.
   ///
@@ -211,23 +213,24 @@ class SemanticsUpdateBuilder {
   }
 
   void _updateNode(
-      int id,
-      int flags,
-      int actions,
-      double left,
-      double top,
-      double right,
-      double bottom,
-      String label,
-      Float64List transform,
-      Int32List children) native "SemanticsUpdateBuilder_updateNode";
+          int id,
+          int flags,
+          int actions,
+          double left,
+          double top,
+          double right,
+          double bottom,
+          String label,
+          Float64List transform,
+          Int32List children) =>
+      throw new UnimplementedError();
 
   /// Creates a [SemanticsUpdate] object that encapsulates the updates recorded
   /// by this object.
   ///
   /// The returned object can be passed to [Window.updateSemantics] to actually
   /// update the semantics retained by the system.
-  SemanticsUpdate build() native "SemanticsUpdateBuilder_build";
+  SemanticsUpdate build() => throw new UnimplementedError();
 }
 
 /// An opaque object representing a batch of semantics updates.
@@ -247,5 +250,5 @@ class SemanticsUpdate {
   ///
   /// After calling this function, the semantics update is cannot be used
   /// further.
-  void dispose() native "SemanticsUpdateBuilder_dispose";
+  void dispose() => throw new UnimplementedError();
 }

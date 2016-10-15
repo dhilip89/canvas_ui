@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// An opaque object representing a composited scene.
 ///
 /// To create a Scene object, use a [SceneBuilder].
@@ -18,7 +20,7 @@ class Scene {
   /// Releases the resources used by this scene.
   ///
   /// After calling this function, the scene is cannot be used further.
-  void dispose() native "Scene_dispose";
+  void dispose() => throw new UnimplementedError();
 }
 
 /// Builds a [Scene] containing the given visuals.
@@ -33,7 +35,7 @@ class SceneBuilder {
   SceneBuilder() {
     _constructor();
   }
-  void _constructor() native "SceneBuilder_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// Pushes a transform operation onto the operation stack.
   ///
@@ -48,7 +50,7 @@ class SceneBuilder {
     _pushTransform(matrix4);
   }
 
-  void _pushTransform(Float64List matrix4) native "SceneBuilder_pushTransform";
+  void _pushTransform(Float64List matrix4) => throw new UnimplementedError();
 
   /// Pushes a rectangular clip operation onto the operation stack.
   ///
@@ -59,8 +61,8 @@ class SceneBuilder {
     _pushClipRect(rect.left, rect.right, rect.top, rect.bottom);
   }
 
-  void _pushClipRect(double left, double right, double top, double bottom)
-      native "SceneBuilder_pushClipRect";
+  void _pushClipRect(double left, double right, double top, double bottom) =>
+      throw new UnimplementedError();
 
   /// Pushes a rounded-rectangular clip operation onto the operation stack.
   ///
@@ -68,14 +70,14 @@ class SceneBuilder {
   ///
   /// See [pop] for details about the operation stack.
   void pushClipRRect(RRect rrect) => _pushClipRRect(rrect._value);
-  void _pushClipRRect(Float32List rrect) native "SceneBuilder_pushClipRRect";
+  void _pushClipRRect(Float32List rrect) => throw new UnimplementedError();
 
   /// Pushes a path clip operation onto the operation stack.
   ///
   /// Rasterization outside the given path is discarded.
   ///
   /// See [pop] for details about the operation stack.
-  void pushClipPath(Path path) native "SceneBuilder_pushClipPath";
+  void pushClipPath(Path path) => throw new UnimplementedError();
 
   /// Pushes an opacity operation onto the operation stack.
   ///
@@ -85,7 +87,7 @@ class SceneBuilder {
   /// opacity).
   ///
   /// See [pop] for details about the operation stack.
-  void pushOpacity(int alpha) native "SceneBuilder_pushOpacity";
+  void pushOpacity(int alpha) => throw new UnimplementedError();
 
   /// Pushes a color filter operation onto the operation stack.
   ///
@@ -97,8 +99,8 @@ class SceneBuilder {
     _pushColorFilter(color.value, transferMode.index);
   }
 
-  void _pushColorFilter(int color, int transferMode)
-      native "SceneBuilder_pushColorFilter";
+  void _pushColorFilter(int color, int transferMode) =>
+      throw new UnimplementedError();
 
   /// Pushes a backdrop filter operation onto the operation stack.
   ///
@@ -106,8 +108,7 @@ class SceneBuilder {
   /// rasterizing the given objects.
   ///
   /// See [pop] for details about the operation stack.
-  void pushBackdropFilter(ImageFilter filter)
-      native "SceneBuilder_pushBackdropFilter";
+  void pushBackdropFilter(ImageFilter filter) => throw new UnimplementedError();
 
   /// Pushes a shader mask operation onto the operation stack.
   ///
@@ -120,13 +121,9 @@ class SceneBuilder {
         maskRect.bottom, transferMode.index);
   }
 
-  void _pushShaderMask(
-      Shader shader,
-      double maskRectLeft,
-      double maskRectRight,
-      double maskRectTop,
-      double maskRectBottom,
-      int transferMode) native "SceneBuilder_pushShaderMask";
+  void _pushShaderMask(Shader shader, double maskRectLeft, double maskRectRight,
+          double maskRectTop, double maskRectBottom, int transferMode) =>
+      throw new UnimplementedError();
 
   /// Ends the effect of the most recently pushed operation.
   ///
@@ -134,7 +131,7 @@ class SceneBuilder {
   /// operations in the stack applies to each of the objects added to the scene.
   /// Calling this function removes the most recently added operation from the
   /// stack.
-  void pop() native "SceneBuilder_pop";
+  void pop() => throw new UnimplementedError();
 
   /// Adds an object to the scene that displays performance statistics.
   ///
@@ -166,7 +163,8 @@ class SceneBuilder {
   }
 
   void _addPerformanceOverlay(int enabledOptions, double left, double right,
-      double top, double bottom) native "SceneBuilder_addPerformanceOverlay";
+          double top, double bottom) =>
+      throw new UnimplementedError();
 
   /// Adds a [Picture] to the scene.
   ///
@@ -179,8 +177,8 @@ class SceneBuilder {
     _addPicture(offset.dx, offset.dy, picture, hints);
   }
 
-  void _addPicture(double dx, double dy, Picture picture, int hints)
-      native "SceneBuilder_addPicture";
+  void _addPicture(double dx, double dy, Picture picture, int hints) =>
+      throw new UnimplementedError();
 
   /// (mojo-only) Adds a scene rendered by another application to the scene for
   /// this application.
@@ -194,13 +192,9 @@ class SceneBuilder {
         physicalHeight, sceneToken);
   }
 
-  void _addChildScene(
-      double dx,
-      double dy,
-      double devicePixelRatio,
-      int physicalWidth,
-      int physicalHeight,
-      int sceneToken) native "SceneBuilder_addChildScene";
+  void _addChildScene(double dx, double dy, double devicePixelRatio,
+          int physicalWidth, int physicalHeight, int sceneToken) =>
+      throw new UnimplementedError();
 
   /// Sets a threshold after which additional debugging information should be recorded.
   ///
@@ -208,8 +202,8 @@ class SceneBuilder {
   /// interested in using this feature, please contact [flutter-dev](https://groups.google.com/forum/#!forum/flutter-dev).
   /// We'll hopefully be able to figure out how to make this feature more useful
   /// to you.
-  void setRasterizerTracingThreshold(int frameInterval)
-      native "SceneBuilder_setRasterizerTracingThreshold";
+  void setRasterizerTracingThreshold(int frameInterval) =>
+      throw new UnimplementedError();
 
   /// Finishes building the scene.
   ///
@@ -219,5 +213,5 @@ class SceneBuilder {
   ///
   /// After calling this function, the scene builder object is invalid and
   /// cannot be used further.
-  Scene build() native "SceneBuilder_build";
+  Scene build() => throw new UnimplementedError();
 }

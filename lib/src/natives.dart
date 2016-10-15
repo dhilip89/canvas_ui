@@ -2,13 +2,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 // Corelib 'print' implementation.
 void _print(arg) {
   _Logger._printString(arg.toString());
 }
 
 class _Logger {
-  static void _printString(String s) native "Logger_PrintString";
+  static void _printString(String s) => throw new UnimplementedError();
 }
 
 // A service protocol extension to schedule a frame to be rendered into the
@@ -34,7 +36,7 @@ void _setupHooks() {
   });
 }
 
-void _scheduleMicrotask(void callback()) native "ScheduleMicrotask";
+void _scheduleMicrotask(void callback()) => throw new UnimplementedError();
 
 String _baseURL;
 Uri _getBaseURL() => Uri.parse(_baseURL);

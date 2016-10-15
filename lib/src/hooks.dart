@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 void _updateWindowMetrics(double devicePixelRatio, double width, double height,
     double top, double right, double bottom, double left) {
   window

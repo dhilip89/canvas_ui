@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// Base class for [Size] and [Offset], which are both ways to describe
 /// a distance as a two-dimensional axis-aligned vector.
 abstract class OffsetBase {

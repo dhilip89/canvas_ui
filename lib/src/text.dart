@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// Whether to slant the glyphs in the font
 enum FontStyle {
   /// Use the upright glyphs
@@ -636,40 +638,40 @@ abstract class Paragraph {
   /// The amount of horizontal space this paragraph occupies.
   ///
   /// Valid only after [layout] has been called.
-  double get width native "Paragraph_width";
+  double get width => throw new UnimplementedError();
 
   /// The amount of vertical space this paragraph occupies.
   ///
   /// Valid only after [layout] has been called.
-  double get height native "Paragraph_height";
+  double get height => throw new UnimplementedError();
 
   /// The minimum width that this paragraph could be without failing to paint
   /// its contents within itself.
   ///
   /// Valid only after [layout] has been called.
-  double get minIntrinsicWidth native "Paragraph_minIntrinsicWidth";
+  double get minIntrinsicWidth => throw new UnimplementedError();
 
   /// Returns the smallest width beyond which increasing the width never
   /// decreases the height.
   ///
   /// Valid only after [layout] has been called.
-  double get maxIntrinsicWidth native "Paragraph_maxIntrinsicWidth";
+  double get maxIntrinsicWidth => throw new UnimplementedError();
 
   /// The distance from the top of the paragraph to the alphabetic
   /// baseline of the first line, in logical pixels.
-  double get alphabeticBaseline native "Paragraph_alphabeticBaseline";
+  double get alphabeticBaseline => throw new UnimplementedError();
 
   /// The distance from the top of the paragraph to the ideographic
   /// baseline of the first line, in logical pixels.
-  double get ideographicBaseline native "Paragraph_ideographicBaseline";
+  double get ideographicBaseline => throw new UnimplementedError();
 
   /// Computes the size and position of each glyph in the paragraph.
   void layout(ParagraphConstraints constraints) => _layout(constraints.width);
-  void _layout(double width) native "Paragraph_layout";
+  void _layout(double width) => throw new UnimplementedError();
 
   /// Returns a list of text boxes that enclose the given text range.
-  List<TextBox> getBoxesForRange(int start, int end)
-      native "Paragraph_getRectsForRange";
+  List<TextBox> getBoxesForRange(int start, int end) =>
+      throw new UnimplementedError();
 
   /// Returns the text position closest to the given offset.
   TextPosition getPositionForOffset(Offset offset) {
@@ -678,20 +680,21 @@ abstract class Paragraph {
         offset: encoded[0], affinity: TextAffinity.values[encoded[1]]);
   }
 
-  List<int> _getPositionForOffset(double dx, double dy)
-      native "Paragraph_getPositionForOffset";
+  List<int> _getPositionForOffset(double dx, double dy) =>
+      throw new UnimplementedError();
 
   /// Returns the [start, end] of the word at the given offset. Characters not
   /// part of a word, such as spaces, symbols, and punctuation, have word breaks
   /// on both sides. In such cases, this method will return [offset, offset+1].
   /// Word boundaries are defined more precisely in Unicode Standard Annex #29
   /// http://www.unicode.org/reports/tr29/#Word_Boundaries
-  List<int> getWordBoundary(int offset) native "Paragraph_getWordBoundary";
+  List<int> getWordBoundary(int offset) => throw new UnimplementedError();
 
   // Redirecting the paint function in this way solves some dependency problems
   // in the C++ code. If we straighten out the C++ dependencies, we can remove
   // this indirection.
-  void _paint(Canvas canvas, double x, double y) native "Paragraph_paint";
+  void _paint(Canvas canvas, double x, double y) =>
+      throw new UnimplementedError();
 }
 
 /// Builds a [Paragraph] containing text with the given styling information.
@@ -701,7 +704,7 @@ class ParagraphBuilder {
   ParagraphBuilder() {
     _constructor();
   }
-  void _constructor() native "ParagraphBuilder_constructor";
+  void _constructor() => throw new UnimplementedError();
 
   /// Applies the given style to the added text until [pop] is called.
   ///
@@ -713,13 +716,9 @@ class ParagraphBuilder {
       style._letterSpacing,
       style._wordSpacing,
       style._height);
-  void _pushStyle(
-      Int32List encoded,
-      String fontFamily,
-      double fontSize,
-      double letterSpacing,
-      double wordSpacing,
-      double height) native "ParagraphBuilder_pushStyle";
+  void _pushStyle(Int32List encoded, String fontFamily, double fontSize,
+          double letterSpacing, double wordSpacing, double height) =>
+      throw new UnimplementedError();
 
   /// Ends the effect of the most recent call to [pushStyle].
   ///
@@ -727,12 +726,12 @@ class ParagraphBuilder {
   /// added to the paragraph is affected by all the styles in the stack. Calling
   /// [pop] removes the topmost style in the stack, leaving the remaining styles
   /// in effect.
-  void pop() native "ParagraphBuilder_pop";
+  void pop() => throw new UnimplementedError();
 
   /// Adds the given text to the paragraph.
   ///
   /// The text will be styled according to the current stack of text styles.
-  void addText(String text) native "ParagraphBuilder_addText";
+  void addText(String text) => throw new UnimplementedError();
 
   /// Applies the given paragraph style and returns a Paragraph containing the added text and associated styling.
   ///
@@ -741,5 +740,6 @@ class ParagraphBuilder {
   Paragraph build(ParagraphStyle style) => _build(style._encoded,
       style._fontFamily, style._fontSize, style._lineHeight, style._ellipsis);
   Paragraph _build(Int32List encoded, String fontFamily, double fontSize,
-      double lineHeight, String ellipsis) native "ParagraphBuilder_build";
+          double lineHeight, String ellipsis) =>
+      throw new UnimplementedError();
 }

@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
+part of canvas_ui;
+
 /// Signature of callbacks that have no arguments and return no data.
 typedef void VoidCallback();
 
@@ -172,7 +174,7 @@ class Window {
 
   /// Requests that, at the next appropriate opportunity, the [onBeginFrame]
   /// callback be invoked.
-  void scheduleFrame() native "Window_scheduleFrame";
+  void scheduleFrame() => throw new UnimplementedError();
 
   /// Updates the application's rendering on the GPU with the newly provided
   /// [Scene]. This function must be called within the scope of the
@@ -191,7 +193,7 @@ class Window {
   /// [SceneBuilder.addPicture]. With the [SceneBuilder.build] method
   /// you can then obtain a [Scene] object, which you can display to
   /// the user via this [render] function.
-  void render(Scene scene) native "Window_render";
+  void render(Scene scene) => throw new UnimplementedError();
 
   /// Whether the user has requested that [updateSemantics] be called when
   /// the semantic contents of window changes.
@@ -218,7 +220,8 @@ class Window {
   ///
   /// In either case, this function disposes the given update, which means the
   /// semantics update cannot be used further.
-  void updateSemantics(SemanticsUpdate update) native "Window_updateSemantics";
+  void updateSemantics(SemanticsUpdate update) =>
+      throw new UnimplementedError();
 
   /// Sends a message to a platform-specific plugin.
   ///
@@ -231,10 +234,9 @@ class Window {
     _sendPlatformMessage(name, callback, data);
   }
 
-  void _sendPlatformMessage(
-      String name,
-      PlatformMessageResponseCallback callback,
-      ByteData data) native "Window_sendPlatformMessage";
+  void _sendPlatformMessage(String name,
+          PlatformMessageResponseCallback callback, ByteData data) =>
+      throw new UnimplementedError();
 
   /// Called whenever this window receives a message from a platform-specific
   /// plugin.
@@ -249,8 +251,8 @@ class Window {
   PlatformMessageCallback onPlatformMessage;
 
   /// Called by [_dispatchPlatformMessage].
-  void _respondToPlatformMessage(int responseId, ByteData data)
-      native "Window_respondToPlatformMessage";
+  void _respondToPlatformMessage(int responseId, ByteData data) =>
+      throw new UnimplementedError();
 }
 
 /// The [Window] singleton. This object exposes the size of the display, the
