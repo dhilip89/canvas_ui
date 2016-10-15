@@ -1,3 +1,5 @@
+import 'package:canvas_ui/canvas_ui.dart' show sayHello;
+
 void main() {
-  print('hello world');
+  sayHello();
 }
