@@ -174,7 +174,7 @@ class Window {
 
   /// Requests that, at the next appropriate opportunity, the [onBeginFrame]
   /// callback be invoked.
-  void scheduleFrame() => throw new UnimplementedError();
+  VoidCallback scheduleFrame;
 
   /// Updates the application's rendering on the GPU with the newly provided
   /// [Scene]. This function must be called within the scope of the

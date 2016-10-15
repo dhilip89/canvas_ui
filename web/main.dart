@@ -1,5 +1,6 @@
-import 'package:canvas_ui/canvas_ui.dart' show sayHello;
+import 'package:canvas_ui/canvas_ui.dart' as canvas_ui;
+import 'dart:html';
 
 void main() {
-  sayHello();
+  canvas_ui.setupWebHooks(document.querySelector('#stage'));
 }

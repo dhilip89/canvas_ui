@@ -1,24 +1,23 @@
 library canvas_ui;
 
+import 'dart:html' as html;
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'dart:math' as math;
 import 'dart:typed_data';
 
-part './src/compositing.dart';
-part './src/geometry.dart';
-part './src/hash_codes.dart';
-part './src/hooks.dart';
-part './src/lerp.dart';
-part './src/mojo_services.dart';
-part './src/natives.dart';
-part './src/painting.dart';
-part './src/pointer.dart';
-part './src/semantics.dart';
-part './src/text.dart';
-part './src/window.dart';
+part './api/compositing.dart';
+part './api/geometry.dart';
+part './api/hash_codes.dart';
+part './api/hooks.dart';
+part './api/lerp.dart';
+part './api/mojo_services.dart';
+part './api/natives.dart';
+part './api/painting.dart';
+part './api/pointer.dart';
+part './api/semantics.dart';
+part './api/text.dart';
+part './api/window.dart';
 
-void sayHello() {
-  print('hello world!');
-}
+part './impl/web_hooks.dart';
