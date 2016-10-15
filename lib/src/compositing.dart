@@ -8,7 +8,7 @@
 ///
 /// Scene objects can be displayed on the screen using the
 /// [Window.render] method.
-class Scene extends NativeFieldWrapperClass2 {
+class Scene {
   /// Creates an uninitialized Scene object.
   ///
   /// Calling the Scene constructor directly will not create a useable
@@ -28,7 +28,7 @@ class Scene extends NativeFieldWrapperClass2 {
 /// To draw graphical operations onto a [Scene], first create a
 /// [Picture] using a [PictureRecorder] and a [Canvas], and then add
 /// it to the scene using [addPicture].
-class SceneBuilder extends NativeFieldWrapperClass2 {
+class SceneBuilder {
   /// Creates an empty [SceneBuilder] object.
   SceneBuilder() {
     _constructor();

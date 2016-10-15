@@ -164,7 +164,7 @@ class SemanticsFlags {
 ///
 /// Once created, the [SemanticsUpdate] objects can be passed to
 /// [Window.updateSemantics] to update the semantics conveyed to the user.
-class SemanticsUpdateBuilder extends NativeFieldWrapperClass2 {
+class SemanticsUpdateBuilder {
   /// Creates an empty [SemanticsUpdateBuilder] object.
   SemanticsUpdateBuilder() {
     _constructor();
@@ -236,7 +236,7 @@ class SemanticsUpdateBuilder extends NativeFieldWrapperClass2 {
 ///
 /// Semantics updates can be applied to the system's retained semantics tree
 /// using the [Window.updateSemantics] method.
-class SemanticsUpdate extends NativeFieldWrapperClass2 {
+class SemanticsUpdate {
   /// Creates an uninitialized SemanticsUpdate object.
   ///
   /// Calling the SemanticsUpdate constructor directly will not create a useable

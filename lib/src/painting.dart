@@ -558,7 +558,7 @@ class Paint {
 ///
 /// To draw an Image, use one of the methods on the [Canvas] class, such as
 /// [drawImage].
-abstract class Image extends NativeFieldWrapperClass2 {
+abstract class Image {
   /// The number of image pixels along the image's horizontal axis.
   int get width native "Image_width";
 
@@ -612,7 +612,7 @@ enum PathFillType {
 ///
 /// Paths can be drawn on canvases using [Canvas.drawPath], and can
 /// used to create clip regions using [Canvas.clipPath].
-class Path extends NativeFieldWrapperClass2 {
+class Path {
   /// Create a new empty [Path] object.
   Path() {
     _constructor();
@@ -837,7 +837,7 @@ enum BlurStyle {
 /// color pixels.
 ///
 /// Instances of this class are used with [Paint.maskFilter] on [Paint] objects.
-class MaskFilter extends NativeFieldWrapperClass2 {
+class MaskFilter {
   /// Creates a mask filter that takes the shape being drawn and blurs it.
   ///
   /// This is commonly used to approximate shadows.
@@ -920,7 +920,7 @@ class ColorFilter {
 /// A filter operation to apply to a raster image.
 ///
 /// See [SceneBuilder.pushBackdropFilter].
-class ImageFilter extends NativeFieldWrapperClass2 {
+class ImageFilter {
   void _constructor() native "ImageFilter_constructor";
 
   /// A source filter containing an image.
@@ -947,7 +947,7 @@ class ImageFilter extends NativeFieldWrapperClass2 {
 
 /// Base class for objects such as [Gradient] and [ImageShader] which
 /// correspond to shaders as used by [Paint.shader].
-abstract class Shader extends NativeFieldWrapperClass2 {}
+abstract class Shader {}
 
 /// Defines what happens at the edge of the gradient.
 enum TileMode {
@@ -1132,7 +1132,7 @@ enum PointMode {
 ///
 /// The current transform and clip can be saved and restored using the stack
 /// managed by the [save], [saveLayer], and [restore] methods.
-class Canvas extends NativeFieldWrapperClass2 {
+class Canvas {
   /// Creates a canvas for recording graphical operations into the
   /// given picture recorder.
   ///
@@ -1572,7 +1572,7 @@ class Canvas extends NativeFieldWrapperClass2 {
 /// A [Picture] can be placed in a [Scene] using a [SceneBuilder], via
 /// the [SceneBuilder.addPicture] method. A [Picture] can also be
 /// drawn into a [Canvas], using the [Canvas.drawPicture] method.
-abstract class Picture extends NativeFieldWrapperClass2 {
+abstract class Picture {
   /// Creates an uninitialized Picture object.
   ///
   /// Calling the Picture constructor directly will not create a useable
@@ -1588,7 +1588,7 @@ abstract class Picture extends NativeFieldWrapperClass2 {
 ///
 /// To begin recording, construct a [Canvas] to record the commands.
 /// To end recording, use the [PictureRecorder.endRecording] method.
-class PictureRecorder extends NativeFieldWrapperClass2 {
+class PictureRecorder {
   /// Creates a new idle PictureRecorder. To associate it with a
   /// [Canvas] and begin recording, pass this [PictureRecorder] to the
   /// [Canvas] constructor.
