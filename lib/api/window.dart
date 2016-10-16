@@ -249,10 +249,6 @@ class Window {
   /// If the handler does not need to respond, the handler should pass `null` to
   /// the callback.
   PlatformMessageCallback onPlatformMessage;
-
-  /// Called by [_dispatchPlatformMessage].
-  void _respondToPlatformMessage(int responseId, ByteData data) =>
-      throw new UnimplementedError();
 }
 
 /// The [Window] singleton. This object exposes the size of the display, the

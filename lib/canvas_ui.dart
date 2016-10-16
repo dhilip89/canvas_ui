@@ -10,7 +10,6 @@ import 'dart:typed_data';
 part './api/compositing.dart';
 part './api/geometry.dart';
 part './api/hash_codes.dart';
-part './api/hooks.dart';
 part './api/lerp.dart';
 part './api/mojo_services.dart';
 part './api/natives.dart';

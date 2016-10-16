@@ -45,13 +45,14 @@ class _WebHooks {
     // routes
     pushRoute();
 
+    // frame scheduling
     window.scheduleFrame = onScheduleFrame;
 
+    // app visibility
     visibilitySubscription =
-        html.document.onVisibilityChange.listen((html.Event event) {
-      updateAppLifecycleState(!html.document.hidden);
-    });
+        html.document.onVisibilityChange.listen(onVisibilityChange);
 
+    // pointer events
     pointerCancelSubscription =
         stage.on['pointercancel'].listen(onPointerCancel);
     pointerEnterSubscription = stage.on['pointerenter'].listen(onPointerEnter);
@@ -62,27 +63,27 @@ class _WebHooks {
   }
 
   void onPointerCancel(html.Event event) {
-    html.window.console.log(event);
+//    html.window.console.log(event);
   }
 
   void onPointerEnter(html.Event event) {
-    html.window.console.log(event);
+//    html.window.console.log(event);
   }
 
   void onPointerLeave(html.Event event) {
-    html.window.console.log(event);
+//    html.window.console.log(event);
   }
 
   void onPointerDown(html.Event event) {
-    html.window.console.log(event);
+//    html.window.console.log(event);
   }
 
   void onPointerMove(html.Event event) {
-    html.window.console.log(event);
+//    html.window.console.log(event);
   }
 
   void onPointerUp(html.Event event) {
-    html.window.console.log(event);
+//    html.window.console.log(event);
   }
 
   void dispose() {
@@ -132,18 +133,54 @@ class _WebHooks {
   }
 
   void pushRoute() {
-//    html.window.console.log(html.window.location);
+    String path = html.window.location.pathname + html.window.location.search;
+
+    assert(window._defaultRouteName == null);
+    window._defaultRouteName = path;
+    // TODO(abarth): If we ever start calling _pushRoute other than before main,
+    // we should add a change notification callback.
   }
 
-  void updateAppLifecycleState(bool visible) {
-    int value = visible ? 1 : 0;
+  void popRoute() {
+    if (window.onPopRoute != null) window.onPopRoute();
+  }
 
-    _onAppLifecycleStateChanged(value);
+  void dispatchPlatformMessage(String name, ByteData data, int responseId) {
+    if (window.onPlatformMessage != null) {
+      window.onPlatformMessage(name, data, (ByteData responseData) {
+        respondToPlatformMessage(responseId, responseData);
+      });
+    } else {
+      respondToPlatformMessage(responseId, null);
+    }
+  }
+
+  void respondToPlatformMessage(int responseId, ByteData data) {
+    html.window.console.log(responseId);
+    html.window.console.log(data);
+  }
+
+  void dispatchPointerDataPacket(PointerDataPacket packet) {
+    if (window.onPointerDataPacket != null) window.onPointerDataPacket(packet);
+  }
+
+  void dispatchSemanticsAction(int id, int action) {
+    if (window.onSemanticsAction != null)
+      window.onSemanticsAction(id, SemanticsAction.values[action]);
+  }
+
+  void onVisibilityChange(html.Event event) {
+    bool visible = !html.document.hidden;
+    int state = visible ? 1 : 0;
+
+    if (window.onAppLifecycleStateChanged != null)
+      window.onAppLifecycleStateChanged(AppLifecycleState.values[state]);
   }
 
   void onScheduleFrame() {
     html.window.requestAnimationFrame((num highResTime) {
-      _beginFrame(highResTime.toInt());
+      if (window.onBeginFrame != null)
+        window.onBeginFrame(new Duration(microseconds: highResTime.toInt()));
     });
   }
 }
