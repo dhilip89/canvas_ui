@@ -90,17 +90,16 @@ class _WebHooks {
     visibilitySubscription.cancel();
   }
 
-  // hook calls
+  // hooks
 
   void updateWindowMetrics() {
-    _updateWindowMetrics(
-        html.window.devicePixelRatio.toDouble(),
-        stage.clientWidth.toDouble(),
-        stage.clientHeight.toDouble(),
-        0.0,
-        0.0,
-        0.0,
-        0.0);
+    window
+      .._devicePixelRatio = html.window.devicePixelRatio.toDouble()
+      .._physicalSize =
+          new Size(stage.clientWidth.toDouble(), stage.clientHeight.toDouble())
+      .._padding =
+          new WindowPadding._(top: 0.0, right: 0.0, bottom: 0.0, left: 0.0);
+    if (window.onMetricsChanged != null) window.onMetricsChanged();
   }
 
   void updateLocale() {
@@ -122,11 +121,14 @@ class _WebHooks {
       country = language.toUpperCase();
     }
 
-    _updateLocale(language, country);
+    window._locale = new Locale(language, country);
+    if (window.onLocaleChanged != null) window.onLocaleChanged();
   }
 
   void updateSemanticsEnabled(bool enabled) {
-    _updateSemanticsEnabled(enabled);
+    window._semanticsEnabled = enabled;
+    if (window.onSemanticsEnabledChanged != null)
+      window.onSemanticsEnabledChanged();
   }
 
   void pushRoute() {

@@ -4,27 +4,6 @@
 
 part of canvas_ui;
 
-void _updateWindowMetrics(double devicePixelRatio, double width, double height,
-    double top, double right, double bottom, double left) {
-  window
-    .._devicePixelRatio = devicePixelRatio
-    .._physicalSize = new Size(width, height)
-    .._padding =
-        new WindowPadding._(top: top, right: right, bottom: bottom, left: left);
-  if (window.onMetricsChanged != null) window.onMetricsChanged();
-}
-
-void _updateLocale(String languageCode, String countryCode) {
-  window._locale = new Locale(languageCode, countryCode);
-  if (window.onLocaleChanged != null) window.onLocaleChanged();
-}
-
-void _updateSemanticsEnabled(bool enabled) {
-  window._semanticsEnabled = enabled;
-  if (window.onSemanticsEnabledChanged != null)
-    window.onSemanticsEnabledChanged();
-}
-
 void _pushRoute(String route) {
   assert(window._defaultRouteName == null);
   window._defaultRouteName = route;
