@@ -1,0 +1,16 @@
+name: 'flutter_demo'
+publish_to: none
+
+environment:
+  sdk: '>=1.19.0 <2.0.0'
+
+dependencies:
+  canvas_ui:
+    path: ../canvas_ui
+  flutter:
+    path: ../flutter
+  browser: '>=0.10.0 <0.11.0'
+  dart_to_js_script_rewriter: '^1.0.1'
+
+transformers:
+- dart_to_js_script_rewriter

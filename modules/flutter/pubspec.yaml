@@ -3,6 +3,7 @@ version: 0.0.21
 author: Flutter Authors <flutter-dev@googlegroups.com>
 description: A framework for writing Flutter applications
 homepage: http://flutter.io
+publish_to: none
 
 dependencies:
   collection: '>=1.9.1 <2.0.0'
