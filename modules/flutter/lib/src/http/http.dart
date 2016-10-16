@@ -1,6 +1,6 @@
 // Copyright (c) 2013, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+// BSD-style license that can be found in the CHROMIUM_LICENSE file.
 
 /// A composable, [Future]-based library for making HTTP requests.
 import 'dart:async';

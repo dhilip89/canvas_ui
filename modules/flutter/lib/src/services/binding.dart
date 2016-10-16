@@ -1,6 +1,6 @@
 // Copyright 2016 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// found in the CHROMIUM_LICENSE file.
 
 import 'dart:async';
 
@@ -21,7 +21,7 @@ import 'shell.dart';
 /// rejected as not matching any registered servers.
 ///
 /// The ServicesBinding also registers a [LicenseEntryCollector] that exposes
-/// the licenses found in the LICENSE file stored at the root of the asset
+/// the licenses found in the CHROMIUM_LICENSE file stored at the root of the asset
 /// bundle.
 abstract class ServicesBinding extends BindingBase {
   @override

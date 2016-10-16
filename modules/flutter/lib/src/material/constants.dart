@@ -1,6 +1,6 @@
 // Copyright 2015 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// found in the CHROMIUM_LICENSE file.
 
 /// The height of the toolbar component of the [AppBar].
 const double kToolbarHeight = 56.0;
