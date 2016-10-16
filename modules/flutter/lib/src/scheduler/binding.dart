@@ -5,8 +5,8 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:developer';
-import 'canvas_ui' as ui show window;
-import 'canvas_ui' show VoidCallback;
+import 'package:canvas_ui/canvas_ui.dart' as ui show window;
+import 'package:canvas_ui/canvas_ui.dart' show VoidCallback;
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart';
 import 'debug.dart';
 import 'priority.dart';
 
-export 'canvas_ui' show VoidCallback;
+export 'package:canvas_ui/canvas_ui.dart' show VoidCallback;
 
 /// Slows down animations by this factor to help in development.
 double get timeDilation => _timeDilation;

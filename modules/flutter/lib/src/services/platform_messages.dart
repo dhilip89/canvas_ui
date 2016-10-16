@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'canvas_ui' as ui;
+import 'package:canvas_ui/canvas_ui.dart' as ui;
 
 String _decodeUTF8(ByteData data) {
   return data != null ? UTF8.decoder.convert(data.buffer.asUint8List()) : null;

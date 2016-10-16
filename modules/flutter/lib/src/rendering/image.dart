@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'canvas_ui' as ui show Image;
+import 'package:canvas_ui/canvas_ui.dart' as ui show Image;
 
 import 'box.dart';
 import 'object.dart';

@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:math' as math;
-import 'canvas_ui' as ui show lerpDouble;
+import 'package:canvas_ui/canvas_ui.dart' as ui show lerpDouble;
 
 import 'package:flutter/gestures.dart';
 import 'package:meta/meta.dart';

@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:math' as math;
-import 'canvas_ui' show SemanticsFlags;
+import 'package:canvas_ui/canvas_ui.dart' show SemanticsFlags;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';

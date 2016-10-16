@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'canvas_ui' show Color;
+import 'package:canvas_ui/canvas_ui.dart' show Color;
 
 /// [Color] constants which represent Material design's
 /// [color palette](http://www.google.com/design/spec/style/color.html).

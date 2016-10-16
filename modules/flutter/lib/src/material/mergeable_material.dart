@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
-import 'canvas_ui' show lerpDouble;
+import 'package:canvas_ui/canvas_ui.dart' show lerpDouble;
 
 /// The base type for [MaterialSlice] and [MaterialGap].
 ///

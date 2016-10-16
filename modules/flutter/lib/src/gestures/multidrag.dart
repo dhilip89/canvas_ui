@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:async';
-import 'canvas_ui' show Point, Offset;
+import 'package:canvas_ui/canvas_ui.dart' show Point, Offset;
 
 import 'package:meta/meta.dart';
 

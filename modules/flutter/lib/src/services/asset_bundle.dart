@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'canvas_ui' as ui;
+import 'package:canvas_ui/canvas_ui.dart' as ui;
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';

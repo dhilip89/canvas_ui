@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'canvas_ui' as ui;
-import 'canvas_ui' show Rect, SemanticsAction, SemanticsFlags;
+import 'package:canvas_ui/canvas_ui.dart' as ui;
+import 'package:canvas_ui/canvas_ui.dart' show Rect, SemanticsAction, SemanticsFlags;
 import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
@@ -13,7 +13,7 @@ import 'package:vector_math/vector_math_64.dart';
 
 import 'node.dart';
 
-export 'canvas_ui' show SemanticsAction;
+export 'package:canvas_ui/canvas_ui.dart' show SemanticsAction;
 
 /// Interface for [RenderObject]s to implement when they want to support
 /// being tapped, etc.

@@ -4,7 +4,7 @@
 
 import 'dart:async';
 import 'dart:typed_data';
-import 'canvas_ui' as ui show Image, decodeImageFromDataPipe, decodeImageFromList;
+import 'package:canvas_ui/canvas_ui.dart' as ui show Image, decodeImageFromDataPipe, decodeImageFromList;
 
 import 'package:mojo/core.dart' show MojoDataPipeConsumer;
 

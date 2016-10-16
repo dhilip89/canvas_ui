@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-export 'canvas_ui' show
+export 'package:canvas_ui/canvas_ui.dart' show
   BlurStyle,
   Canvas,
   Color,

@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:developer';
-import 'canvas_ui' as ui show Scene, SceneBuilder, window;
+import 'package:canvas_ui/canvas_ui.dart' as ui show Scene, SceneBuilder, window;
 
 import 'package:vector_math/vector_math_64.dart';
 

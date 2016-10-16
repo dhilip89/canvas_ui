@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:async';
-import 'canvas_ui' as ui show Image;
+import 'package:canvas_ui/canvas_ui.dart' as ui show Image;
 
 import 'package:meta/meta.dart';
 

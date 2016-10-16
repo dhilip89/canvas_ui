@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'canvas_ui' show Point, Offset;
+import 'package:canvas_ui/canvas_ui.dart' show Point, Offset;
 
 import 'lsq_solver.dart';
 
-export 'canvas_ui' show Point, Offset;
+export 'package:canvas_ui/canvas_ui.dart' show Point, Offset;
 
 class _Estimate {
   const _Estimate({ this.xCoefficients, this.yCoefficients, this.time, this.degree, this.confidence });

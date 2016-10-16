@@ -4,7 +4,7 @@
 
 import 'dart:async';
 import 'dart:collection';
-import 'canvas_ui' as ui show window, PointerDataPacket;
+import 'package:canvas_ui/canvas_ui.dart' as ui show window, PointerDataPacket;
 
 import 'package:flutter/foundation.dart';
 

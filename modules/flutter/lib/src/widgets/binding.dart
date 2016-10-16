@@ -3,8 +3,8 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:developer' as developer;
-import 'canvas_ui' as ui show window;
-import 'canvas_ui' show AppLifecycleState, Locale;
+import 'package:canvas_ui/canvas_ui.dart' as ui show window;
+import 'package:canvas_ui/canvas_ui.dart' show AppLifecycleState, Locale;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
@@ -15,7 +15,7 @@ import 'package:meta/meta.dart';
 import 'app.dart';
 import 'framework.dart';
 
-export 'canvas_ui' show AppLifecycleState, Locale;
+export 'package:canvas_ui/canvas_ui.dart' show AppLifecycleState, Locale;
 
 /// Interface for classes that register with the Widgets layer binding.
 ///
