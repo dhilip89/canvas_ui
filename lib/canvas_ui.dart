@@ -12,7 +12,6 @@ part './api/geometry.dart';
 part './api/hash_codes.dart';
 part './api/lerp.dart';
 part './api/mojo_services.dart';
-part './api/natives.dart';
 part './api/painting.dart';
 part './api/pointer.dart';
 part './api/semantics.dart';
