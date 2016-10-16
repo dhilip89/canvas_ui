@@ -26,6 +26,11 @@ class _WebHooks {
   StreamSubscription pointerUpSubscription;
 
   _WebHooks(html.CanvasElement stage) : this.stage = stage {
+    addHooks();
+    addImplementations();
+  }
+
+  void addHooks() {
     // register callbacks for window;
     _scheduleFrameHook = onScheduleFrame;
     _sendPlatformMessageHook = onSendPlatformMessage;
@@ -64,6 +69,8 @@ class _WebHooks {
     pointerMoveSubscription = stage.on['pointermove'].listen(onPointerMove);
     pointerUpSubscription = stage.on['pointerup'].listen(onPointerUp);
   }
+
+  void addImplementations() {}
 
   void onPointerCancel(html.Event event) {
 //    html.window.console.log(event);
