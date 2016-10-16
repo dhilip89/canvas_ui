@@ -29,6 +29,13 @@ typedef void PlatformMessageResponseCallback(ByteData data);
 typedef void PlatformMessageCallback(
     String name, ByteData data, PlatformMessageResponseCallback callback);
 
+typedef void SendPlatformMessageCallback(
+    String name, PlatformMessageResponseCallback callback, ByteData data);
+
+typedef void UpdateSemanticsCallback(SemanticsUpdate update);
+
+typedef void RenderCallback(Scene scene);
+
 /// States that an application can be in.
 enum AppLifecycleState {
   // These values must match the order of the values of
@@ -174,7 +181,9 @@ class Window {
 
   /// Requests that, at the next appropriate opportunity, the [onBeginFrame]
   /// callback be invoked.
-  VoidCallback scheduleFrame;
+  void scheduleFrame() {
+    _scheduleFrameHook();
+  }
 
   /// Updates the application's rendering on the GPU with the newly provided
   /// [Scene]. This function must be called within the scope of the
@@ -193,7 +202,9 @@ class Window {
   /// [SceneBuilder.addPicture]. With the [SceneBuilder.build] method
   /// you can then obtain a [Scene] object, which you can display to
   /// the user via this [render] function.
-  void render(Scene scene) => throw new UnimplementedError();
+  void render(Scene scene) {
+    _renderHook(scene);
+  }
 
   /// Whether the user has requested that [updateSemantics] be called when
   /// the semantic contents of window changes.
@@ -220,8 +231,9 @@ class Window {
   ///
   /// In either case, this function disposes the given update, which means the
   /// semantics update cannot be used further.
-  void updateSemantics(SemanticsUpdate update) =>
-      throw new UnimplementedError();
+  void updateSemantics(SemanticsUpdate update) {
+    _updateSemanticsHook(update);
+  }
 
   /// Sends a message to a platform-specific plugin.
   ///
@@ -231,12 +243,8 @@ class Window {
   /// message, `callback` will be called with the response.
   void sendPlatformMessage(
       String name, ByteData data, PlatformMessageResponseCallback callback) {
-    _sendPlatformMessage(name, callback, data);
+    _sendPlatformMessageHook(name, callback, data);
   }
-
-  void _sendPlatformMessage(String name,
-          PlatformMessageResponseCallback callback, ByteData data) =>
-      throw new UnimplementedError();
 
   /// Called whenever this window receives a message from a platform-specific
   /// plugin.
@@ -255,3 +263,8 @@ class Window {
 /// core scheduler API, the input event callback, the graphics drawing API, and
 /// other such core services.
 final Window window = new Window._();
+
+VoidCallback _scheduleFrameHook;
+SendPlatformMessageCallback _sendPlatformMessageHook;
+UpdateSemanticsCallback _updateSemanticsHook;
+RenderCallback _renderHook;

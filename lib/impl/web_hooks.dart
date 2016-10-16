@@ -26,6 +26,12 @@ class _WebHooks {
   StreamSubscription pointerUpSubscription;
 
   _WebHooks(html.CanvasElement stage) : this.stage = stage {
+    // register callbacks for window;
+    _scheduleFrameHook = onScheduleFrame;
+    _sendPlatformMessageHook = onSendPlatformMessage;
+    _updateSemanticsHook = onUpdateSemantics;
+    _renderHook = onRender;
+
     // window metrics
     updateWindowMetrics();
     resizeSubscription = html.window.onResize.listen((html.Event event) {
@@ -44,9 +50,6 @@ class _WebHooks {
 
     // routes
     pushRoute();
-
-    // frame scheduling
-    window.scheduleFrame = onScheduleFrame;
 
     // app visibility
     visibilitySubscription =
@@ -156,8 +159,7 @@ class _WebHooks {
   }
 
   void respondToPlatformMessage(int responseId, ByteData data) {
-    html.window.console.log(responseId);
-    html.window.console.log(data);
+    throw new UnimplementedError();
   }
 
   void dispatchPointerDataPacket(PointerDataPacket packet) {
@@ -182,5 +184,18 @@ class _WebHooks {
       if (window.onBeginFrame != null)
         window.onBeginFrame(new Duration(microseconds: highResTime.toInt()));
     });
+  }
+
+  void onSendPlatformMessage(
+      String name, PlatformMessageResponseCallback callback, ByteData data) {
+    throw new UnimplementedError();
+  }
+
+  void onUpdateSemantics(SemanticsUpdate update) {
+    throw new UnimplementedError();
+  }
+
+  void onRender(Scene scene) {
+    throw new UnimplementedError();
   }
 }
