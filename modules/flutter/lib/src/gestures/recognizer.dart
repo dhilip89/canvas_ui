@@ -4,7 +4,7 @@
 
 import 'dart:async';
 import 'dart:collection';
-import 'dart:ui' show Point, Offset;
+import 'canvas_ui' show Point, Offset;
 
 import 'package:meta/meta.dart';
 

@@ -6,7 +6,7 @@ import 'dart:collection';
 
 // COMMON SIGNATURES
 
-export 'dart:ui' show VoidCallback;
+export 'canvas_ui' show VoidCallback;
 
 /// Signature for callbacks that report that an underlying value has changed.
 ///

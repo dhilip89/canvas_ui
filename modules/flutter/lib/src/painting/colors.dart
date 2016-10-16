@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'dart:ui' show Color, lerpDouble, hashValues;
+import 'canvas_ui' show Color, lerpDouble, hashValues;
 
 /// A color represented using [alpha], [hue], [saturation], and [value].
 ///

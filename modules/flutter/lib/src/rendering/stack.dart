@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:math' as math;
-import 'dart:ui' show lerpDouble, hashValues;
+import 'canvas_ui' show lerpDouble, hashValues;
 
 import 'package:meta/meta.dart';
 

@@ -3,8 +3,8 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:async';
-import 'dart:ui' show Size, Locale, hashValues;
-import 'dart:ui' as ui show Image;
+import 'canvas_ui' show Size, Locale, hashValues;
+import 'canvas_ui' as ui show Image;
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';

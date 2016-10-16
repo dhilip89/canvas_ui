@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:math' as math;
-import 'dart:ui' as ui show Image, Gradient, lerpDouble;
+import 'canvas_ui' as ui show Image, Gradient, lerpDouble;
 
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';

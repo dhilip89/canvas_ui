@@ -2,9 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'dart:ui' show hashValues, TextAffinity, TextPosition;
+import 'canvas_ui' show hashValues, TextAffinity, TextPosition;
 
-export 'dart:ui' show TextAffinity, TextPosition;
+export 'canvas_ui' show TextAffinity, TextPosition;
 
 /// A range of characters in a string of text.
 class TextRange {

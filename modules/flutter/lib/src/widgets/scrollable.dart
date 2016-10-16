@@ -4,7 +4,7 @@
 
 import 'dart:async';
 import 'dart:math' as math;
-import 'dart:ui' as ui show window;
+import 'canvas_ui' as ui show window;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';

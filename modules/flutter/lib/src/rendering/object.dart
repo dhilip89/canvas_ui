@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:developer';
-import 'dart:ui' as ui show ImageFilter, PictureRecorder;
+import 'canvas_ui' as ui show ImageFilter, PictureRecorder;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';

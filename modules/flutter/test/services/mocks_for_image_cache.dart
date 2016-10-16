@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'dart:async';
-import 'dart:ui' as ui show Image;
+import 'canvas_ui' as ui show Image;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';

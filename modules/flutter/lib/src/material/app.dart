@@ -11,7 +11,7 @@ import 'overscroll_indicator.dart';
 import 'page.dart';
 import 'theme.dart';
 
-export 'dart:ui' show Locale;
+export 'canvas_ui' show Locale;
 
 const TextStyle _errorTextStyle = const TextStyle(
   color: const Color(0xD0FF0000),

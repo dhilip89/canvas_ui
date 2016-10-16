@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'dart:ui' show Color, Size, Rect;
+import 'canvas_ui' show Color, Size, Rect;
 
 import 'animation.dart';
 import 'animations.dart';

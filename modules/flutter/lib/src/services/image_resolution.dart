@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:ui' show hashValues;
+import 'canvas_ui' show hashValues;
 
 import 'package:flutter/foundation.dart';
 

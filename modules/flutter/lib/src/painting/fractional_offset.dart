@@ -3,7 +3,7 @@
 // found in the CHROMIUM_LICENSE file.
 
 import 'basic_types.dart';
-import 'dart:ui' as ui show lerpDouble;
+import 'canvas_ui' as ui show lerpDouble;
 
 /// An offset that's expressed as a fraction of a Size.
 ///

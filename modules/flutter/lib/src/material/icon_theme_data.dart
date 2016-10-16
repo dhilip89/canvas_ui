@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'dart:ui' as ui show lerpDouble;
-import 'dart:ui' show Color, hashValues;
+import 'canvas_ui' as ui show lerpDouble;
+import 'canvas_ui' show Color, hashValues;
 
 /// Defines the color, opacity, and size of icons.
 ///

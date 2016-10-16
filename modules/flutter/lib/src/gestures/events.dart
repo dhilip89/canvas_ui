@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'dart:ui' show Point, Offset, PointerDeviceKind;
+import 'canvas_ui' show Point, Offset, PointerDeviceKind;
 
 import 'package:flutter/foundation.dart';
 
-export 'dart:ui' show Point, Offset, PointerDeviceKind;
+export 'canvas_ui' show Point, Offset, PointerDeviceKind;
 
 /// The bit of [PointerEvent.buttons] that corresponds to the primary mouse button.
 ///

@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the CHROMIUM_LICENSE file.
 
-import 'dart:ui' as ui show ImageFilter, Picture, SceneBuilder;
-import 'dart:ui' show Offset;
+import 'canvas_ui' as ui show ImageFilter, Picture, SceneBuilder;
+import 'canvas_ui' show Offset;
 
 import 'package:flutter/painting.dart';
 import 'package:vector_math/vector_math_64.dart';
