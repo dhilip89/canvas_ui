@@ -89,8 +89,7 @@ class _WebHooks {
       .._devicePixelRatio = html.window.devicePixelRatio.toDouble()
       .._physicalSize =
           new Size(stage.clientWidth.toDouble(), stage.clientHeight.toDouble())
-      .._padding =
-          new WindowPadding._(top: 0.0, right: 0.0, bottom: 0.0, left: 0.0);
+      .._padding = WindowPadding.zero;
     if (window.onMetricsChanged != null) window.onMetricsChanged();
   }
 
