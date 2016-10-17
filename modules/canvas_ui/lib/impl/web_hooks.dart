@@ -27,7 +27,6 @@ class _WebHooks {
 
   _WebHooks(html.CanvasElement stage) : this.stage = stage {
     addHooks();
-    addImplementations();
   }
 
   void addHooks() {
@@ -69,8 +68,6 @@ class _WebHooks {
     pointerMoveSubscription = stage.on['pointermove'].listen(onPointerUpdate);
     pointerUpSubscription = stage.on['pointerup'].listen(onPointerUpdate);
   }
-
-  void addImplementations() {}
 
   void onPointerUpdate(html.Event event) {
     html.window.console.log(event);
