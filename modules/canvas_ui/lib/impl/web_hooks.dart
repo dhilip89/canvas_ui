@@ -62,38 +62,19 @@ class _WebHooks {
 
     // pointer events
     pointerCancelSubscription =
-        stage.on['pointercancel'].listen(onPointerCancel);
-    pointerEnterSubscription = stage.on['pointerenter'].listen(onPointerEnter);
-    pointerLeaveSubscription = stage.on['pointerleave'].listen(onPointerLeave);
-    pointerDownSubscription = stage.on['pointerdown'].listen(onPointerDown);
-    pointerMoveSubscription = stage.on['pointermove'].listen(onPointerMove);
-    pointerUpSubscription = stage.on['pointerup'].listen(onPointerUp);
+        stage.on['pointercancel'].listen(onPointerUpdate);
+    pointerEnterSubscription = stage.on['pointerenter'].listen(onPointerUpdate);
+    pointerLeaveSubscription = stage.on['pointerleave'].listen(onPointerUpdate);
+    pointerDownSubscription = stage.on['pointerdown'].listen(onPointerUpdate);
+    pointerMoveSubscription = stage.on['pointermove'].listen(onPointerUpdate);
+    pointerUpSubscription = stage.on['pointerup'].listen(onPointerUpdate);
   }
 
   void addImplementations() {}
 
-  void onPointerCancel(html.Event event) {
-//    html.window.console.log(event);
-  }
-
-  void onPointerEnter(html.Event event) {
-//    html.window.console.log(event);
-  }
-
-  void onPointerLeave(html.Event event) {
-//    html.window.console.log(event);
-  }
-
-  void onPointerDown(html.Event event) {
-//    html.window.console.log(event);
-  }
-
-  void onPointerMove(html.Event event) {
-//    html.window.console.log(event);
-  }
-
-  void onPointerUp(html.Event event) {
-//    html.window.console.log(event);
+  void onPointerUpdate(html.Event event) {
+    html.window.console.log(event);
+    html.window.console.log(event.type);
   }
 
   void dispose() {
