@@ -29,12 +29,12 @@ typedef void PlatformMessageResponseCallback(ByteData data);
 typedef void PlatformMessageCallback(
     String name, ByteData data, PlatformMessageResponseCallback callback);
 
-typedef void SendPlatformMessageCallback(
+typedef void _SendPlatformMessageCallback(
     String name, PlatformMessageResponseCallback callback, ByteData data);
 
-typedef void UpdateSemanticsCallback(SemanticsUpdate update);
+typedef void _UpdateSemanticsCallback(SemanticsUpdate update);
 
-typedef void RenderCallback(Scene scene);
+typedef void _RenderCallback(Scene scene);
 
 /// States that an application can be in.
 enum AppLifecycleState {
@@ -265,6 +265,6 @@ class Window {
 final Window window = new Window._();
 
 VoidCallback _scheduleFrameHook;
-SendPlatformMessageCallback _sendPlatformMessageHook;
-UpdateSemanticsCallback _updateSemanticsHook;
-RenderCallback _renderHook;
+_RenderCallback _renderHook;
+_UpdateSemanticsCallback _updateSemanticsHook;
+_SendPlatformMessageCallback _sendPlatformMessageHook;
