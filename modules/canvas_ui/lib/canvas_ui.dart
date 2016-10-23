@@ -2,20 +2,17 @@ library canvas_ui;
 
 import 'dart:html' as html;
 import 'dart:async';
-import 'dart:convert';
-import 'dart:developer' as developer;
 import 'dart:math' as math;
 import 'dart:typed_data';
 
-part './api/compositing.dart';
-part './api/geometry.dart';
-part './api/hash_codes.dart';
-part './api/lerp.dart';
-part './api/mojo_services.dart';
-part './api/painting.dart';
-part './api/pointer.dart';
-part './api/semantics.dart';
-part './api/text.dart';
-part './api/window.dart';
+part './src/api/compositing.dart';
+part './src/api/geometry.dart';
+part './src/api/hash_codes.dart';
+part './src/api/lerp.dart';
+part './src/api/painting.dart';
+part './src/api/pointer.dart';
+part './src/api/semantics.dart';
+part './src/api/text.dart';
+part './src/api/window.dart';
 
-part './impl/web_hooks.dart';
+part './src/impl/web_hooks.dart';

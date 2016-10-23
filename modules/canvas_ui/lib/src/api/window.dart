@@ -29,13 +29,6 @@ typedef void PlatformMessageResponseCallback(ByteData data);
 typedef void PlatformMessageCallback(
     String name, ByteData data, PlatformMessageResponseCallback callback);
 
-typedef void _SendPlatformMessageCallback(
-    String name, PlatformMessageResponseCallback callback, ByteData data);
-
-typedef void _UpdateSemanticsCallback(SemanticsUpdate update);
-
-typedef void _RenderCallback(Scene scene);
-
 /// States that an application can be in.
 enum AppLifecycleState {
   // These values must match the order of the values of
@@ -243,6 +236,11 @@ class Window {
   /// message, `callback` will be called with the response.
   void sendPlatformMessage(
       String name, ByteData data, PlatformMessageResponseCallback callback) {
+    _sendPlatformMessage(name, callback, data);
+  }
+
+  void _sendPlatformMessage(
+      String name, PlatformMessageResponseCallback callback, ByteData data) {
     _sendPlatformMessageHook(name, callback, data);
   }
 
@@ -263,6 +261,13 @@ class Window {
 /// core scheduler API, the input event callback, the graphics drawing API, and
 /// other such core services.
 final Window window = new Window._();
+
+typedef void _SendPlatformMessageCallback(
+    String name, PlatformMessageResponseCallback callback, ByteData data);
+
+typedef void _UpdateSemanticsCallback(SemanticsUpdate update);
+
+typedef void _RenderCallback(Scene scene);
 
 VoidCallback _scheduleFrameHook;
 _RenderCallback _renderHook;

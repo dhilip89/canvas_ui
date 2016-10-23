@@ -555,8 +555,7 @@ class Paint {
 
 /// Opaque handle to raw decoded image data (pixels).
 ///
-/// To obtain an Image object, use the [decodeImageFromDataPipe] or
-/// [decodeImageFromList] functions.
+/// To obtain an Image object, use [decodeImageFromList].
 ///
 /// To draw an Image, use one of the methods on the [Canvas] class, such as
 /// [drawImage].
@@ -575,12 +574,8 @@ abstract class Image {
   String toString() => '[$width\u00D7$height]';
 }
 
-/// Callback signature for [decodeImageFromDataPipe] and [decodeImageFromList].
+/// Callback signature for [decodeImageFromList].
 typedef void ImageDecoderCallback(Image result);
-
-/// Convert an image file from a mojo pipe into an [Image] object.
-void decodeImageFromDataPipe(int handle, ImageDecoderCallback callback) =>
-    throw new UnimplementedError();
 
 /// Convert an image file from a byte array into an [Image] object.
 void decodeImageFromList(Uint8List list, ImageDecoderCallback callback) =>
@@ -930,14 +925,14 @@ class ImageFilter {
   //   _constructor();
   //   _initImage(image);
   // }
-  // void _initImage(Image image) native "ImageFilter_initImage";
+  // void _initImage(Image image) => throw new UnimplementedError();
 
   /// A source filter containing a picture.
   // ImageFilter.picture({ Picture picture }) {
   //   _constructor();
   //   _initPicture(picture);
   // }
-  // void _initPicture(Picture picture) native "ImageFilter_initPicture";
+  // void _initPicture(Picture picture) => throw new UnimplementedError();
 
   /// Creates an image filter that applies a Gaussian blur.
   ImageFilter.blur({double sigmaX: 0.0, double sigmaY: 0.0}) {
