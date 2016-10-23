@@ -268,16 +268,16 @@ const Endianness _kFakeHostEndian = Endianness.LITTLE_ENDIAN;
 /// Most APIs on [Canvas] take a [Paint] object to describe the style
 /// to use for that operation.
 class Paint {
-  final _PaintData _paintData = new _PaintData();
+  final _PaintData _data = new _PaintData();
 
   /// Whether to apply anti-aliasing to lines and images drawn on the
   /// canvas.
   ///
   /// Defaults to true.
-  bool get isAntiAlias => _paintData.isAntiAlias;
+  bool get isAntiAlias => _data.isAntiAlias;
 
   set isAntiAlias(bool value) {
-    _paintData.isAntiAlias = value;
+    _data.isAntiAlias = value;
   }
 
   /// The color to use when stroking or filling a shape.
@@ -292,11 +292,11 @@ class Paint {
   ///
   /// This color is not used when compositing. To colorize a layer, use
   /// [colorFilter].
-  Color get color => _paintData.color;
+  Color get color => _data.color;
 
   set color(Color value) {
     assert(value != null);
-    _paintData.color = value;
+    _data.color = value;
   }
 
   /// A transfer mode to apply when a shape is drawn or a layer is composited.
@@ -310,21 +310,21 @@ class Paint {
   /// layer is being composited.
   ///
   /// Defaults to [TransferMode.srcOver].
-  TransferMode get transferMode => _paintData.transferMode;
+  TransferMode get transferMode => _data.transferMode;
 
   set transferMode(TransferMode value) {
     assert(value != null);
-    _paintData.transferMode = value;
+    _data.transferMode = value;
   }
 
   /// Whether to paint inside shapes, the edges of shapes, or both.
   ///
   /// Defaults to [PaintingStyle.fill].
-  PaintingStyle get style => _paintData.paintingStyle;
+  PaintingStyle get style => _data.paintingStyle;
 
   set style(PaintingStyle value) {
     assert(value != null);
-    _paintData.paintingStyle = value;
+    _data.paintingStyle = value;
   }
 
   /// How wide to make edges drawn when [style] is set to
@@ -332,32 +332,32 @@ class Paint {
   /// the direction orthogonal to the direction of the path.
   ///
   /// Defaults to 0.0, which correspond to a hairline width.
-  double get strokeWidth => _paintData.strokeWidth;
+  double get strokeWidth => _data.strokeWidth;
 
   set strokeWidth(double value) {
     assert(value != null);
-    _paintData.strokeWidth = value;
+    _data.strokeWidth = value;
   }
 
   /// The kind of finish to place on the end of lines drawn when
   /// [style] is set to [PaintingStyle.stroke].
   ///
   /// Defaults to [StrokeCap.butt], i.e. no caps.
-  StrokeCap get strokeCap => _paintData.strokeCap;
+  StrokeCap get strokeCap => _data.strokeCap;
 
   set strokeCap(StrokeCap value) {
     assert(value != null);
-    _paintData.strokeCap = value;
+    _data.strokeCap = value;
   }
 
   /// A mask filter (for example, a blur) to apply to a shape after it has been
   /// drawn but before it has been composited into the image.
   ///
   /// See [MaskFilter] for details.
-  MaskFilter get maskFilter => _paintData.maskFilter;
+  MaskFilter get maskFilter => _data.maskFilter;
 
   set maskFilter(MaskFilter value) {
-    _paintData.maskFilter = value;
+    _data.maskFilter = value;
   }
 
   /// Controls the performance vs quality trade-off to use when applying
@@ -366,11 +366,11 @@ class Paint {
   ///
   /// Defaults to [FilterQuality.none].
   // TODO(ianh): verify that the image drawing methods actually respect this
-  FilterQuality get filterQuality => _paintData.filterQuality;
+  FilterQuality get filterQuality => _data.filterQuality;
 
   set filterQuality(FilterQuality value) {
     assert(value != null);
-    _paintData.filterQuality = value;
+    _data.filterQuality = value;
   }
 
   /// The shader to use when stroking or filling a shape.
@@ -383,10 +383,10 @@ class Paint {
   ///  * [ImageShader], a shader that tiles an [Image].
   ///  * [colorFilter], which overrides [shader].
   ///  * [color], which is used if [shader] and [colorFilter] are null.
-  Shader get shader => _paintData.shader;
+  Shader get shader => _data.shader;
 
   set shader(Shader value) {
-    _paintData.shader = value;
+    _data.shader = value;
   }
 
   /// A color filter to apply when a shape is drawn or when a layer is
@@ -395,14 +395,14 @@ class Paint {
   /// See [ColorFilter] for details.
   ///
   /// When a shape is being drawn, [colorFilter] overrides [color] and [shader].
-  ColorFilter get colorFilter => _paintData.colorFilter;
+  ColorFilter get colorFilter => _data.colorFilter;
 
   set colorFilter(ColorFilter value) {
     if (value != null) {
       assert(value._color != null);
       assert(value._transferMode != null);
     }
-    _paintData.colorFilter = value;
+    _data.colorFilter = value;
   }
 
   @override
@@ -1073,18 +1073,18 @@ class Canvas {
   /// Call [restore] to pop the save stack and apply the paint to the group.
   void saveLayer(Rect bounds, Paint paint) {
     if (bounds == null) {
-      _saveLayerWithoutBounds(paint._paintData);
+      _saveLayerWithoutBounds(paint._data);
     } else {
-      _saveLayer(bounds.left, bounds.top, bounds.right, bounds.bottom,
-          paint._paintData);
+      _saveLayer(
+          bounds.left, bounds.top, bounds.right, bounds.bottom, paint._data);
     }
   }
 
-  void _saveLayerWithoutBounds(_PaintData paintData) =>
+  void _saveLayerWithoutBounds(_PaintData data) =>
       throw new UnimplementedError();
   // TODO(jackson): Paint should be optional, but making it optional causes crash
   void _saveLayer(double left, double top, double right, double bottom,
-          _PaintData paintData) =>
+          _PaintData data) =>
       throw new UnimplementedError();
 
   /// Pops the current save stack, if there is anything to pop.
@@ -1173,37 +1173,36 @@ class Canvas {
   /// Draws a line between the given [Point]s using the given paint. The line is
   /// stroked, the value of the [Paint.style] is ignored for this call.
   void drawLine(Point p1, Point p2, Paint paint) {
-    _drawLine(p1.x, p1.y, p2.x, p2.y, paint._paintData);
+    _drawLine(p1.x, p1.y, p2.x, p2.y, paint._data);
   }
 
-  void _drawLine(
-          double x1, double y1, double x2, double y2, _PaintData paintData) =>
+  void _drawLine(double x1, double y1, double x2, double y2, _PaintData data) =>
       throw new UnimplementedError();
 
   /// Fills the canvas with the given [Paint].
   ///
   /// To fill the canvas with a solid color and transfer mode, consider
   /// [drawColor] instead.
-  void drawPaint(Paint paint) => _drawPaint(paint._paintData);
-  void _drawPaint(_PaintData paintData) => throw new UnimplementedError();
+  void drawPaint(Paint paint) => _drawPaint(paint._data);
+  void _drawPaint(_PaintData data) => throw new UnimplementedError();
 
   /// Draws a rectangle with the given [Paint]. Whether the rectangle is filled
   /// or stroked (or both) is controlled by [Paint.style].
   void drawRect(Rect rect, Paint paint) {
-    _drawRect(rect.left, rect.top, rect.right, rect.bottom, paint._paintData);
+    _drawRect(rect.left, rect.top, rect.right, rect.bottom, paint._data);
   }
 
   void _drawRect(double left, double top, double right, double bottom,
-          _PaintData paintData) =>
+          _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws a rounded rectangle with the given [Paint]. Whether the rectangle is
   /// filled or stroked (or both) is controlled by [Paint.style].
   void drawRRect(RRect rrect, Paint paint) {
-    _drawRRect(rrect._value, paint._paintData);
+    _drawRRect(rrect._value, paint._data);
   }
 
-  void _drawRRect(Float32List rrect, _PaintData paintData) =>
+  void _drawRRect(Float32List rrect, _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws a shape consisting of the difference between two rounded rectangles
@@ -1212,22 +1211,21 @@ class Canvas {
   ///
   /// This shape is almost but not quite entirely unlike an annulus.
   void drawDRRect(RRect outer, RRect inner, Paint paint) {
-    _drawDRRect(outer._value, inner._value, paint._paintData);
+    _drawDRRect(outer._value, inner._value, paint._data);
   }
 
-  void _drawDRRect(
-          Float32List outer, Float32List inner, _PaintData paintData) =>
+  void _drawDRRect(Float32List outer, Float32List inner, _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws an axis-aligned oval that fills the given axis-aligned rectangle
   /// with the given [Paint]. Whether the oval is filled or stroked (or both) is
   /// controlled by [Paint.style].
   void drawOval(Rect rect, Paint paint) {
-    _drawOval(rect.left, rect.top, rect.right, rect.bottom, paint._paintData);
+    _drawOval(rect.left, rect.top, rect.right, rect.bottom, paint._data);
   }
 
   void _drawOval(double left, double top, double right, double bottom,
-          _PaintData paintData) =>
+          _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws a circle centered at the point given by the first two arguments and
@@ -1235,10 +1233,10 @@ class Canvas {
   /// the fourth argument. Whether the circle is filled or stroked (or both) is
   /// controlled by [Paint.style].
   void drawCircle(Point c, double radius, Paint paint) {
-    _drawCircle(c.x, c.y, radius, paint._paintData);
+    _drawCircle(c.x, c.y, radius, paint._data);
   }
 
-  void _drawCircle(double x, double y, double radius, _PaintData paintData) =>
+  void _drawCircle(double x, double y, double radius, _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draw an arc scaled to fit inside the given rectangle. It starts from
@@ -1254,7 +1252,7 @@ class Canvas {
   void drawArc(Rect rect, double startAngle, double sweepAngle, bool useCenter,
       Paint paint) {
     _drawArc(rect.left, rect.top, rect.right, rect.bottom, startAngle,
-        sweepAngle, useCenter, paint._paintData);
+        sweepAngle, useCenter, paint._data);
   }
 
   void _drawArc(
@@ -1265,26 +1263,25 @@ class Canvas {
           double startAngle,
           double sweepAngle,
           bool useCenter,
-          _PaintData paintData) =>
+          _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws the given [Path] with the given [Paint]. Whether this shape is
   /// filled or stroked (or both) is controlled by [Paint.style]. If the path is
   /// filled, then subpaths within it are implicitly closed (see [Path.close]).
   void drawPath(Path path, Paint paint) {
-    _drawPath(path, paint._paintData);
+    _drawPath(path, paint._data);
   }
 
-  void _drawPath(Path path, _PaintData paintData) =>
-      throw new UnimplementedError();
+  void _drawPath(Path path, _PaintData data) => throw new UnimplementedError();
 
   /// Draws the given [Image] into the canvas with its top-left corner at the
   /// given [Point]. The image is composited into the canvas using the given [Paint].
   void drawImage(Image image, Point p, Paint paint) {
-    _drawImage(image, p.x, p.y, paint._paintData);
+    _drawImage(image, p.x, p.y, paint._data);
   }
 
-  void _drawImage(Image image, double x, double y, _PaintData paintData) =>
+  void _drawImage(Image image, double x, double y, _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws the subset of the given image described by the `src` argument into
@@ -1294,7 +1291,7 @@ class Canvas {
   /// an applied filter.
   void drawImageRect(Image image, Rect src, Rect dst, Paint paint) {
     _drawImageRect(image, src.left, src.top, src.right, src.bottom, dst.left,
-        dst.top, dst.right, dst.bottom, paint._paintData);
+        dst.top, dst.right, dst.bottom, paint._data);
   }
 
   void _drawImageRect(
@@ -1307,7 +1304,7 @@ class Canvas {
           double dstTop,
           double dstRight,
           double dstBottom,
-          _PaintData paintData) =>
+          _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draws the given [Image] into the canvas using the given [Paint].
@@ -1325,7 +1322,7 @@ class Canvas {
   /// positions.
   void drawImageNine(Image image, Rect center, Rect dst, Paint paint) {
     _drawImageNine(image, center.left, center.top, center.right, center.bottom,
-        dst.left, dst.top, dst.right, dst.bottom, paint._paintData);
+        dst.left, dst.top, dst.right, dst.bottom, paint._data);
   }
 
   void _drawImageNine(
@@ -1338,7 +1335,7 @@ class Canvas {
           double dstTop,
           double dstRight,
           double dstBottom,
-          _PaintData paintData) =>
+          _PaintData data) =>
       throw new UnimplementedError();
 
   /// Draw the given picture onto the canvas. To create a picture, see
@@ -1354,10 +1351,10 @@ class Canvas {
 
   /// Draws a sequence of points according to the given [PointMode].
   void drawPoints(PointMode pointMode, List<Point> points, Paint paint) {
-    _drawPoints(paint._paintData, pointMode.index, _encodePointList(points));
+    _drawPoints(paint._data, pointMode.index, _encodePointList(points));
   }
 
-  void _drawPoints(_PaintData paintData, int pointMode, Float32List points) =>
+  void _drawPoints(_PaintData data, int pointMode, Float32List points) =>
       throw new UnimplementedError();
 
   void drawVertices(
@@ -1385,12 +1382,12 @@ class Canvas {
         colors.isEmpty ? null : _encodeColorList(colors);
     final Int32List indexBuffer = new Int32List.fromList(indicies);
 
-    _drawVertices(paint._paintData, vertexMode.index, vertexBuffer,
+    _drawVertices(paint._data, vertexMode.index, vertexBuffer,
         textureCoordinateBuffer, colorBuffer, transferMode.index, indexBuffer);
   }
 
   void _drawVertices(
-          _PaintData paintData,
+          _PaintData data,
           int vertexMode,
           Float32List vertices,
           Float32List textureCoordinates,
@@ -1440,12 +1437,12 @@ class Canvas {
         colors.isEmpty ? null : _encodeColorList(colors);
     final Float32List cullRectBuffer = cullRect?._value;
 
-    _drawAtlas(paint._paintData, atlas, rstTransformBuffer, rectBuffer,
-        colorBuffer, transferMode.index, cullRectBuffer);
+    _drawAtlas(paint._data, atlas, rstTransformBuffer, rectBuffer, colorBuffer,
+        transferMode.index, cullRectBuffer);
   }
 
   void _drawAtlas(
-          _PaintData paintData,
+          _PaintData data,
           Image atlas,
           Float32List rstTransforms,
           Float32List rects,
