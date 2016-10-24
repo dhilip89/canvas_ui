@@ -1,17 +1,19 @@
 part of canvas_ui;
 
-_WebHooks _webHooks;
+class CanvasUI {
+  _WebHooks _hooks;
 
-void setupCanvasUI(html.CanvasElement stage) {
-  _webHooks = new _WebHooks(stage);
-}
+  CanvasUI(html.CanvasElement stage) : _hooks = new _WebHooks(stage);
 
-void disposeCanvasUI() {
-  _webHooks.dispose();
+  void dispose() {
+    _hooks.dispose();
+    _hooks = null;
+  }
 }
 
 class _WebHooks {
-  final html.CanvasElement stage;
+  html.CanvasElement stage;
+  html.CanvasRenderingContext2D context2d;
   int handle;
 
   StreamSubscription resizeSubscription;
@@ -25,7 +27,12 @@ class _WebHooks {
   StreamSubscription pointerMoveSubscription;
   StreamSubscription pointerUpSubscription;
 
-  _WebHooks(html.CanvasElement stage) : this.stage = stage {
+  _WebHooks(html.CanvasElement stage) {
+    this.stage = stage;
+    context2d = this.stage.getContext('2d', {
+      'alpha':false
+    });
+
     addHooks();
   }
 
@@ -46,8 +53,8 @@ class _WebHooks {
     updateLocale();
     localeSubscription =
         html.window.on['languagechange'].listen((html.Event event) {
-      updateLocale();
-    });
+          updateLocale();
+        });
 
     // semantics
     updateSemanticsEnabled(false);
@@ -69,14 +76,27 @@ class _WebHooks {
     pointerUpSubscription = stage.on['pointerup'].listen(onPointerUpdate);
   }
 
+  void dispose() {
+    resizeSubscription.cancel();
+    localeSubscription.cancel();
+    visibilitySubscription.cancel();
+
+    pointerCancelSubscription.cancel();
+    pointerEnterSubscription.cancel();
+    pointerLeaveSubscription.cancel();
+    pointerDownSubscription.cancel();
+    pointerMoveSubscription.cancel();
+    pointerUpSubscription.cancel();
+
+    _scheduleFrameHook = null;
+    _sendPlatformMessageHook = null;
+    _updateSemanticsHook = null;
+    _renderHook = null;
+  }
+
   void onPointerUpdate(html.Event event) {
     html.window.console.log(event);
     html.window.console.log(event.type);
-  }
-
-  void dispose() {
-    resizeSubscription.cancel();
-    visibilitySubscription.cancel();
   }
 
   // hooks
@@ -85,7 +105,7 @@ class _WebHooks {
     window
       .._devicePixelRatio = html.window.devicePixelRatio.toDouble()
       .._physicalSize =
-          new Size(stage.clientWidth.toDouble(), stage.clientHeight.toDouble())
+      new Size(stage.clientWidth.toDouble(), stage.clientHeight.toDouble())
       .._padding = WindowPadding.zero;
     if (window.onMetricsChanged != null) window.onMetricsChanged();
   }
@@ -100,7 +120,7 @@ class _WebHooks {
       language = parts[0];
       country = parts[1];
     } else if (html.window.navigator.languages[0] is String &&
-        html.window.navigator.languages[0].contains('-')) {
+               html.window.navigator.languages[0].contains('-')) {
       List<String> parts = html.window.navigator.languages[0].split('-');
       language = parts[0];
       country = parts[1];
@@ -170,8 +190,9 @@ class _WebHooks {
     });
   }
 
-  void onSendPlatformMessage(
-      String name, PlatformMessageResponseCallback callback, ByteData data) {
+  void onSendPlatformMessage(String name,
+                             PlatformMessageResponseCallback callback,
+                             ByteData data) {
     throw new UnimplementedError();
   }
 

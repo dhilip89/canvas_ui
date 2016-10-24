@@ -4,5 +4,5 @@ import 'dart:html';
 void main() {
   CanvasElement stage = document.querySelector('#stage');
 
-  canvas_ui.setupCanvasUI(stage);
+  canvas_ui.CanvasUI canvasUI = new canvas_ui.CanvasUI(stage);
 }
