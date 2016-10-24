@@ -14,7 +14,7 @@ import 'material.dart';
 import 'text_selection.dart';
 import 'theme.dart';
 
-export 'package:flutter_services/editing.dart' show KeyboardType;
+export 'package:flutter/services.dart' show TextInputType;
 
 /// A material design text input field.
 ///
@@ -30,7 +30,7 @@ export 'package:flutter_services/editing.dart' show KeyboardType;
 ///
 /// See also:
 ///
-///  * <https://www.google.com/design/spec/components/text-fields.html>
+///  * <https://material.google.com/components/text-fields.html>
 ///
 /// For a detailed guide on using the input widget, see:
 ///
@@ -44,7 +44,7 @@ class Input extends StatefulWidget {
   Input({
     Key key,
     this.value,
-    this.keyboardType: KeyboardType.text,
+    this.keyboardType: TextInputType.text,
     this.icon,
     this.labelText,
     this.hintText,
@@ -68,7 +68,7 @@ class Input extends StatefulWidget {
   final InputValue value;
 
   /// The type of keyboard to use for editing the text.
-  final KeyboardType keyboardType;
+  final TextInputType keyboardType;
 
   /// An icon to show adjacent to the input field.
   ///
@@ -142,9 +142,9 @@ const Duration _kTransitionDuration = const Duration(milliseconds: 200);
 const Curve _kTransitionCurve = Curves.fastOutSlowIn;
 
 class _InputState extends State<Input> {
-  GlobalKey<RawInputLineState> _rawInputLineKey = new GlobalKey<RawInputLineState>();
+  GlobalKey<RawInputState> _rawInputKey = new GlobalKey<RawInputState>();
 
-  GlobalKey get focusKey => config.key is GlobalKey ? config.key : _rawInputLineKey;
+  GlobalKey get focusKey => config.key is GlobalKey ? config.key : _rawInputKey;
 
   // Optional state to retain if we are inside a Form widget.
   _FormFieldData _formData;
@@ -251,8 +251,8 @@ class _InputState extends State<Input> {
       decoration: new BoxDecoration(
         border: border,
       ),
-      child: new RawInputLine(
-        key: _rawInputLineKey,
+      child: new RawInput(
+        key: _rawInputKey,
         value: value,
         focusKey: focusKey,
         style: textStyle,
@@ -305,11 +305,8 @@ class _InputState extends State<Input> {
     return new RepaintBoundary(
       child: new GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () => _rawInputLineKey.currentState?.requestKeyboard(),
-        child: new Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: child
-        )
+        onTap: () => _rawInputKey.currentState?.requestKeyboard(),
+        child: child
       )
     );
   }

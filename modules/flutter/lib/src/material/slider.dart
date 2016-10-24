@@ -38,7 +38,7 @@ import 'typography.dart';
 ///  * [CheckBox]
 ///  * [Radio]
 ///  * [Switch]
-///  * <https://www.google.com/design/spec/components/sliders.html>
+///  * <https://material.google.com/components/sliders.html>
 class Slider extends StatefulWidget {
   /// Creates a material design slider.
   ///
@@ -78,6 +78,25 @@ class Slider extends StatefulWidget {
   /// value.
   ///
   /// If null, the slider will be displayed as disabled.
+  ///
+  /// The callback provided to onChanged should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt; for example:
+  ///
+  /// ```dart
+  /// new Slider(
+  ///   value: _duelCommandment.toDouble(),
+  ///   min: 1.0,
+  ///   max: 10.0,
+  ///   divisions: 10,
+  ///   label: '$_duelCommandment',
+  ///   onChanged: (double newValue) {
+  ///     setState(() {
+  ///       _duelCommandment = newValue.round();
+  ///     });
+  ///   },
+  /// ),
+  /// ```
   final ValueChanged<double> onChanged;
 
   /// The minium value the user can select.

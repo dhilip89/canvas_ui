@@ -5,7 +5,22 @@
 import 'package:canvas_ui/canvas_ui.dart' show Color;
 
 /// [Color] constants which represent Material design's
-/// [color palette](http://www.google.com/design/spec/style/color.html).
+/// [color palette](http://material.google.com/style/color.html).
+///
+/// To select a specific color from one of the swatches, index into the swatch
+/// using an integer for the specific color desired, as follows:
+///
+/// ```dart
+/// Colors.green[400]  // Selects a mid-range green.
+/// ```
+///
+/// Most swatches have colors from 100 to 900 in increments of one hundred, plus
+/// the color 50. The smaller the number, the more pale the color. The greater
+/// the number, the darker the color. The accent swatches (e.g. [redAccent]) only
+/// have the values 100, 200, 400, and 700.
+///
+/// In addition, a series of blacks and whites with common opacities are
+/// available. For example, [black54] is a pure black with 54% opacity.
 class Colors {
   Colors._();
 

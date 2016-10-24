@@ -19,7 +19,7 @@ import 'theme.dart';
 ///
 ///  * [ListItem.divideItems]
 ///  * [PopupMenuDivider]
-///  * <https://www.google.com/design/spec/components/dividers.html>
+///  * <https://material.google.com/components/dividers.html>
 class Divider extends StatelessWidget {
   /// Creates a material design divider.
   ///
@@ -46,6 +46,12 @@ class Divider extends StatelessWidget {
   ///
   /// Defaults to the current theme's divider color, given by
   /// [ThemeData.dividerColor].
+  ///
+  /// ```dart
+  ///  new Divider(
+  ///    color: Colors.deepOrange[500],
+  ///  ),
+  /// ```
   final Color color;
 
   @override

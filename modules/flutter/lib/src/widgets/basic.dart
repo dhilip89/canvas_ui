@@ -33,6 +33,7 @@ export 'package:flutter/rendering.dart' show
     MainAxisSize,
     MaxTileWidthGridDelegate,
     MultiChildLayoutDelegate,
+    Overflow,
     PaintingContext,
     PointerCancelEvent,
     PointerCancelEventListener,
@@ -270,30 +271,44 @@ class ClipRect extends SingleChildRenderObjectWidget {
 
 /// A widget that clips its child using a rounded rectangle.
 ///
-/// Creates a rounded rectangle from its layout dimensions and the given x and
-/// y radius values and prevents its child from painting outside that rounded
-/// rectangle.
+/// By default, [ClipRRect] uses its own bounds as the base rectangle for the
+/// clip, but the size and location of the clip can be customized using a custom
+/// [clipper].
 class ClipRRect extends SingleChildRenderObjectWidget {
   /// Creates a rounded-rectangular clip.
+  ///
+  /// The [borderRadius] defaults to [BorderRadius.zero], i.e. a rectangle with
+  /// right-angled corners.
+  ///
+  /// If [clipper] is non-null, then [borderRadius] is ignored.
   ClipRRect({
     Key key,
-    @required this.borderRadius,
-    Widget child
-  }) : super(key: key, child: child);
+    this.borderRadius,
+    this.clipper,
+    Widget child,
+  }) : super(key: key, child: child) {
+    assert(borderRadius != null || clipper != null);
+  }
 
   /// The border radius of the rounded corners.
   ///
-  /// Values are clamped to be between zero and half the width of the render
-  /// object.
+  /// Values are clamped so that horizontal and vertical radii sums do not
+  /// exceed width/height.
+  ///
+  /// This value is ignored if [clipper] is non-null.
   final BorderRadius borderRadius;
 
+  /// If non-null, determines which clip to use.
+  final CustomClipper<RRect> clipper;
+
   @override
-  RenderClipRRect createRenderObject(BuildContext context) => new RenderClipRRect(borderRadius: borderRadius);
+  RenderClipRRect createRenderObject(BuildContext context) => new RenderClipRRect(borderRadius: borderRadius, clipper: clipper);
 
   @override
   void updateRenderObject(BuildContext context, RenderClipRRect renderObject) {
     renderObject
-      ..borderRadius = borderRadius;
+      ..borderRadius = borderRadius
+      ..clipper = clipper;
   }
 }
 
@@ -1964,6 +1979,11 @@ class Row extends Flex {
 ///
 /// For details about the flex layout algorithm, see [RenderFlex]. To control
 /// the flex of child widgets, see the [Flexible] widget.
+///
+/// The Column widget does not scroll (and in general it is considered an error
+/// to have more children in a Column than will fit in the available room). If
+/// you have a list of widgets and want them to be able to scroll if there is
+/// insufficient room, consider using a [Block].
 class Column extends Flex {
   /// Creates a vertical array of children.
   ///
@@ -2680,10 +2700,26 @@ class MetaData extends SingleChildRenderObjectWidget {
 
 // UTILITY NODES
 
-/// A widget that annotates the widget tree with a description of the meaning of the widgets.
+/// A widget that annotates the widget tree with a description of the meaning of
+/// the widgets.
 ///
 /// Used by accessibility tools, search engines, and other semantic analysis
 /// software to determine the meaning of the application.
+///
+/// See also:
+///
+/// * [MergeSemantics], which marks a subtree as being a single node for
+///   accessibility purposes.
+/// * [ExcludeSemantics], which excludes a subtree from the semantics tree
+///   (which might be useful if it is, e.g., totally decorative and not
+///   important to the user).
+/// * [RenderObject.semanticsAnnotator], the rendering library API through which
+///   the [Semantics] widget is actually implemented.
+/// * [SemanticsNode], the object used by the rendering library to represent
+///   semantics in the semantics tree.
+/// * [SemanticsDebugger], an overlay to help visualize the semantics tree. Can
+///   be enabled using [WidgetsApp.showSemanticsDebugger] or
+///   [MaterialApp.showSemanticsDebugger].
 class Semantics extends SingleChildRenderObjectWidget {
   /// Creates a semantic annotation.
   ///

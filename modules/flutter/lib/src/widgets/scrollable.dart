@@ -66,6 +66,9 @@ typedef double SnapOffsetCallback(double scrollOffset, Size containerSize);
 ///
 /// Widgets that subclass [Scrollable] typically use state objects that subclass
 /// [ScrollableState].
+///
+/// If you have a list of widgets and want them to be able to scroll if there is
+/// insufficient room, consider using [Block].
 class Scrollable extends StatefulWidget {
   /// Initializes fields for subclasses.
   ///
@@ -513,6 +516,11 @@ class ScrollableState<T extends Scrollable> extends State<T> with SingleTickerPr
   /// If there are no in-progress scrolling physics, this function scrolls to
   /// the given offset instead.
   void didUpdateScrollBehavior(double newScrollOffset) {
+    _setStateMaybeDuringBuild(() {
+      _contentExtent = scrollBehavior.contentExtent;
+      _containerExtent = scrollBehavior.containerExtent;
+    });
+
     // This does not call setState, because if anything below actually
     // changes our build, it will itself independently trigger a frame.
     assert(_controller.isAnimating || _simulation == null);
@@ -536,8 +544,6 @@ class ScrollableState<T extends Scrollable> extends State<T> with SingleTickerPr
   ///     [didUpdateScrollBehavior].
   ///  3. Updating this object's gesture detector with [updateGestureDetector].
   void handleExtentsChanged(double contentExtent, double containerExtent) {
-    _contentExtent = contentExtent;
-    _containerExtent = containerExtent;
     didUpdateScrollBehavior(scrollBehavior.updateExtents(
       contentExtent: contentExtent,
       containerExtent: containerExtent,
@@ -595,8 +601,7 @@ class ScrollableState<T extends Scrollable> extends State<T> with SingleTickerPr
 
   /// Returns the snapped offset closest to the given scroll offset.
   double snapScrollOffset(double scrollOffset) {
-    RenderBox box = context.findRenderObject();
-    return config.snapOffsetCallback == null ? scrollOffset : config.snapOffsetCallback(scrollOffset, box.size);
+    return config.snapOffsetCallback == null ? scrollOffset : config.snapOffsetCallback(scrollOffset, context.size);
   }
 
   Simulation _createSnapSimulation(double scrollVelocity) {
