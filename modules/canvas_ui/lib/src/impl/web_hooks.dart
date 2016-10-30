@@ -68,7 +68,8 @@ class _WebHooks {
     updateSemanticsEnabled(false);
 
     // app visibility
-    visibilitySubscription = html.document.onVisibilityChange.listen(() {});
+    visibilitySubscription =
+        html.document.onVisibilityChange.listen((html.Event e) {});
 
     // pointer events
     pointerCancelSubscription =
