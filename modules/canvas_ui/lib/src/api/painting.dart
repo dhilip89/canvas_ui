@@ -600,32 +600,16 @@ class Path {
   /// The line segment added if [forceMoveTo] is false starts at the
   /// current point and ends at the start of the arc.
   void arcTo(
-      Rect rect, double startAngle, double sweepAngle, bool forceMoveTo) {
-    _arcTo(rect.left, rect.top, rect.right, rect.bottom, startAngle, sweepAngle,
-        forceMoveTo);
-  }
-
-  void _arcTo(double left, double top, double right, double bottom,
-          double startAngle, double sweepAngle, bool forceMoveTo) =>
+          Rect rect, double startAngle, double sweepAngle, bool forceMoveTo) =>
       throw new UnimplementedError();
 
   /// Adds a new subpath that consists of four lines that outline the
   /// given rectangle.
-  void addRect(Rect rect) {
-    _addRect(rect.left, rect.top, rect.right, rect.bottom);
-  }
-
-  void _addRect(double left, double top, double right, double bottom) =>
-      throw new UnimplementedError();
+  void addRect(Rect rect) => throw new UnimplementedError();
 
   /// Adds a new subpath that consists of a curve that forms the
   /// ellipse that fills the given rectangle.
-  void addOval(Rect oval) {
-    _addOval(oval.left, oval.top, oval.right, oval.bottom);
-  }
-
-  void _addOval(double left, double top, double right, double bottom) =>
-      throw new UnimplementedError();
+  void addOval(Rect oval) => throw new UnimplementedError();
 
   /// Adds a new subpath with one arc segment that consists of the arc
   /// that follows the edge of the oval bounded by the given
@@ -635,43 +619,27 @@ class Path {
   /// crosses the horizontal line that intersects the center of the
   /// rectangle and with positive angles going clockwise around the
   /// oval.
-  void addArc(Rect oval, double startAngle, double sweepAngle) {
-    _addArc(
-        oval.left, oval.top, oval.right, oval.bottom, startAngle, sweepAngle);
-  }
-
-  void _addArc(double left, double top, double right, double bottom,
-          double startAngle, double sweepAngle) =>
+  void addArc(Rect oval, double startAngle, double sweepAngle) =>
       throw new UnimplementedError();
 
   /// Adds a new subpath with a sequence of line segments that connect the given
   /// points. If `close` is true, a final line segment will be added that
   /// connects the last point to the first point.
-  void addPolygon(List<Point> points, bool close) {
-    _addPolygon(_encodePointList(points), close);
-  }
-
-  void _addPolygon(Float32List points, bool close) =>
+  void addPolygon(List<Point> points, bool close) =>
       throw new UnimplementedError();
 
   /// Adds a new subpath that consists of the straight lines and
   /// curves needed to form the rounded rectangle described by the
   /// argument.
-  void addRRect(RRect rrect) => _addRRect(rrect._value);
-  void _addRRect(Float32List rrect) => throw new UnimplementedError();
+  void addRRect(RRect rrect) => throw new UnimplementedError();
 
   /// Adds a new subpath that consists of the given path offset by the given
   /// offset.
-  void addPath(Path path, Offset offset) =>
-      _addPath(path, offset.dx, offset.dy);
-  void _addPath(Path path, double dx, double dy) =>
-      throw new UnimplementedError();
+  void addPath(Path path, Offset offset) => throw new UnimplementedError();
 
   /// Adds the given path to this path by extending the current segment of this
   /// path with the the first segment of the given path.
   void extendWithPath(Path path, Offset offset) =>
-      _extendWithPath(path, offset.dx, offset.dy);
-  void _extendWithPath(Path path, double dx, double dy) =>
       throw new UnimplementedError();
 
   /// Closes the last subpath, as if a straight line had been drawn
@@ -688,23 +656,19 @@ class Path {
   /// path was used with [Canvas.clipPath].)
   ///
   /// Returns true if the point is in the path, and false otherwise.
-  bool contains(Point position) => _contains(position.x, position.y);
-  bool _contains(double x, double y) => throw new UnimplementedError();
+  bool contains(Point position) => throw new UnimplementedError();
 
   /// Returns a copy of the path with all the segments of every
   /// subpath translated by the given offset.
-  Path shift(Offset offset) => _shift(offset.dx, offset.dy);
-  Path _shift(double dx, double dy) => throw new UnimplementedError();
+  Path shift(Offset offset) => throw new UnimplementedError();
 
   /// Returns a copy of the path with all the segments of every
   /// subpath transformed by the given matrix.
   Path transform(Float64List matrix4) {
     if (matrix4.length != 16)
       throw new ArgumentError("[matrix4] must have 16 entries.");
-    return _transform(matrix4);
+    throw new UnimplementedError();
   }
-
-  Path _transform(Float64List matrix4) => throw new UnimplementedError();
 }
 
 /// Styles to use for blurs in [MaskFilter] objects.
@@ -762,18 +726,7 @@ class MaskFilter {
   /// is an expensive operation and blurs should therefore be used sparingly.
   MaskFilter.blur(BlurStyle style, double sigma,
       {bool ignoreTransform: false, bool highQuality: false}) {
-    _constructor(
-        style.index, sigma, _makeBlurFlags(ignoreTransform, highQuality));
-  }
-  void _constructor(int style, double sigma, int flags) =>
-      throw new UnimplementedError();
-
-  // Convert constructor parameters to the SkBlurMaskFilter::BlurFlags type.
-  static int _makeBlurFlags(bool ignoreTransform, bool highQuality) {
-    int flags = 0;
-    if (ignoreTransform) flags |= 0x01;
-    if (highQuality) flags |= 0x02;
-    return flags;
+    throw new UnimplementedError();
   }
 }
 
@@ -819,8 +772,6 @@ class ColorFilter {
 ///
 /// See [SceneBuilder.pushBackdropFilter].
 class ImageFilter {
-  void _constructor() => throw new UnimplementedError();
-
   /// A source filter containing an image.
   // ImageFilter.image({ Image image }) {
   //   _constructor();
@@ -837,11 +788,8 @@ class ImageFilter {
 
   /// Creates an image filter that applies a Gaussian blur.
   ImageFilter.blur({double sigmaX: 0.0, double sigmaY: 0.0}) {
-    _constructor();
-    _initBlur(sigmaX, sigmaY);
+    throw new UnimplementedError();
   }
-  void _initBlur(double sigmaX, double sigmaY) =>
-      throw new UnimplementedError();
 }
 
 /// Base class for objects such as [Gradient] and [ImageShader] which
@@ -860,26 +808,6 @@ enum TileMode {
   mirror,
 }
 
-Int32List _encodeColorList(List<Color> colors) {
-  final int colorCount = colors.length;
-  final Int32List result = new Int32List(colorCount);
-  for (int i = 0; i < colorCount; ++i) result[i] = colors[i].value;
-  return result;
-}
-
-Float32List _encodePointList(List<Point> points) {
-  final int pointCount = points.length;
-  final Float32List result = new Float32List(pointCount * 2);
-  for (int i = 0; i < pointCount; ++i) {
-    final int xIndex = i * 2;
-    final int yIndex = xIndex + 1;
-    final Point point = points[i];
-    result[xIndex] = point.x;
-    result[yIndex] = point.y;
-  }
-  return result;
-}
-
 /// A shader (as used by [Paint.shader]) that renders a color gradient.
 ///
 /// There are two useful types of gradients, created by [new Gradient.linear]
@@ -889,8 +817,9 @@ class Gradient extends Shader {
   ///
   /// Use the [Gradient.linear] or [Gradient.radial] constructors to
   /// obtain a usable [Gradient] object.
-  Gradient();
-  void _constructor() => throw new UnimplementedError();
+  Gradient() {
+    throw new UnimplementedError();
+  }
 
   /// Creates a linear gradient from `endPoint[0]` to `endPoint[1]`. If
   /// `colorStops` is provided, `colorStops[i]` is a number from 0 to 1 that
@@ -904,17 +833,8 @@ class Gradient extends Shader {
     if (endPoints == null || endPoints.length != 2)
       throw new ArgumentError("Expected exactly 2 [endPoints].");
     _validateColorStops(colors, colorStops);
-    final Float32List endPointsBuffer = _encodePointList(endPoints);
-    final Int32List colorsBuffer = _encodeColorList(colors);
-    final Float32List colorStopsBuffer =
-        colorStops == null ? null : new Float32List.fromList(colorStops);
-    _constructor();
-    _initLinear(
-        endPointsBuffer, colorsBuffer, colorStopsBuffer, tileMode.index);
+    throw new UnimplementedError();
   }
-  void _initLinear(Float32List endPoints, Int32List colors,
-          Float32List colorStops, int tileMode) =>
-      throw new UnimplementedError();
 
   /// Creates a radial gradient centered at `center` that ends at `radius`
   /// distance from the center. If `colorStops` is provided, `colorStops[i]` is
@@ -925,16 +845,8 @@ class Gradient extends Shader {
   Gradient.radial(Point center, double radius, List<Color> colors,
       [List<double> colorStops = null, TileMode tileMode = TileMode.clamp]) {
     _validateColorStops(colors, colorStops);
-    final Int32List colorsBuffer = _encodeColorList(colors);
-    final Float32List colorStopsBuffer =
-        colorStops == null ? null : new Float32List.fromList(colorStops);
-    _constructor();
-    _initRadial(center.x, center.y, radius, colorsBuffer, colorStopsBuffer,
-        tileMode.index);
+    throw new UnimplementedError();
   }
-  void _initRadial(double centerX, double centerY, double radius,
-          Int32List colors, Float32List colorStops, int tileMode) =>
-      throw new UnimplementedError();
 
   static void _validateColorStops(List<Color> colors, List<double> colorStops) {
     if (colorStops != null && colors.length != colorStops.length)
@@ -959,12 +871,8 @@ class ImageShader extends Shader {
       throw new ArgumentError("[matrix4] argument cannot be null");
     if (matrix4.length != 16)
       throw new ArgumentError("[matrix4] must have 16 entries.");
-    _constructor();
-    _initWithImage(image, tmx.index, tmy.index, matrix4);
+    throw new UnimplementedError();
   }
-  void _constructor() => throw new UnimplementedError();
-  void _initWithImage(Image image, int tmx, int tmy, Float64List matrix4) =>
-      throw new UnimplementedError();
 }
 
 /// Defines how a list of points is interpreted when drawing a set of triangles.
@@ -1047,12 +955,8 @@ class Canvas {
       throw new ArgumentError(
           'The given PictureRecorder is already associated with another Canvas.');
     // TODO(ianh): throw if recorder is defunct (https://github.com/flutter/flutter/issues/2531)
-    _constructor(
-        recorder, cullRect.left, cullRect.top, cullRect.right, cullRect.bottom);
+    throw new UnimplementedError();
   }
-  void _constructor(PictureRecorder recorder, double left, double top,
-          double right, double bottom) =>
-      throw new UnimplementedError();
 
   /// Saves a copy of the current transform and clip on the save stack.
   ///
@@ -1075,17 +979,11 @@ class Canvas {
   /// Call [restore] to pop the save stack and apply the paint to the group.
   void saveLayer(Rect bounds, Paint paint) {
     if (bounds == null) {
-      _saveLayerWithoutBounds(paint);
+      throw new UnimplementedError();
     } else {
-      _saveLayer(bounds.left, bounds.top, bounds.right, bounds.bottom, paint);
+      throw new UnimplementedError();
     }
   }
-
-  void _saveLayerWithoutBounds(Paint paint) => throw new UnimplementedError();
-  // TODO(jackson): Paint should be optional, but making it optional causes crash
-  void _saveLayer(
-          double left, double top, double right, double bottom, Paint paint) =>
-      throw new UnimplementedError();
 
   /// Pops the current save stack, if there is anything to pop.
   /// Otherwise, does nothing.
@@ -1127,34 +1025,24 @@ class Canvas {
   void transform(Float64List matrix4) {
     if (matrix4.length != 16)
       throw new ArgumentError("[matrix4] must have 16 entries.");
-    _transform(matrix4);
+    throw new UnimplementedError();
   }
-
-  void _transform(Float64List matrix4) => throw new UnimplementedError();
 
   /// Replaces the current transform with the specified 4⨉4 transformation
   /// matrix specified as a list of values in column-major order.
   void setMatrix(Float64List matrix4) {
     if (matrix4.length != 16)
       throw new ArgumentError("[matrix4] must have 16 entries.");
-    _setMatrix(matrix4);
+    throw new UnimplementedError();
   }
-
-  void _setMatrix(Float64List matrix4) => throw new UnimplementedError();
 
   /// Reduces the clip region to the intersection of the current clip and the
   /// given rectangle.
-  void clipRect(Rect rect) {
-    _clipRect(rect.left, rect.top, rect.right, rect.bottom);
-  }
-
-  void _clipRect(double left, double top, double right, double bottom) =>
-      throw new UnimplementedError();
+  void clipRect(Rect rect) => throw new UnimplementedError();
 
   /// Reduces the clip region to the intersection of the current clip and the
   /// given rounded rectangle.
-  void clipRRect(RRect rrect) => _clipRRect(rrect._value);
-  void _clipRRect(Float32List rrect) => throw new UnimplementedError();
+  void clipRRect(RRect rrect) => throw new UnimplementedError();
 
   /// Reduces the clip region to the intersection of the current clip and the
   /// given [Path].
@@ -1163,80 +1051,46 @@ class Canvas {
   /// Paints the given [Color] onto the canvas, applying the given
   /// [TransferMode], with the given color being the source and the background
   /// being the destination.
-  void drawColor(Color color, TransferMode transferMode) {
-    _drawColor(color.value, transferMode.index);
-  }
-
-  void _drawColor(int color, int transferMode) =>
+  void drawColor(Color color, TransferMode transferMode) =>
       throw new UnimplementedError();
 
   /// Draws a line between the given [Point]s using the given paint. The line is
   /// stroked, the value of the [Paint.style] is ignored for this call.
-  void drawLine(Point p1, Point p2, Paint paint) {
-    _drawLine(p1.x, p1.y, p2.x, p2.y, paint);
-  }
-
-  void _drawLine(double x1, double y1, double x2, double y2, Paint paint) =>
+  void drawLine(Point p1, Point p2, Paint paint) =>
       throw new UnimplementedError();
 
   /// Fills the canvas with the given [Paint].
   ///
   /// To fill the canvas with a solid color and transfer mode, consider
   /// [drawColor] instead.
-  void drawPaint(Paint paint) => _drawPaint(paint);
-  void _drawPaint(Paint paint) => throw new UnimplementedError();
+  void drawPaint(Paint paint) => throw new UnimplementedError();
 
   /// Draws a rectangle with the given [Paint]. Whether the rectangle is filled
   /// or stroked (or both) is controlled by [Paint.style].
-  void drawRect(Rect rect, Paint paint) {
-    _drawRect(rect.left, rect.top, rect.right, rect.bottom, paint);
-  }
-
-  void _drawRect(
-          double left, double top, double right, double bottom, Paint paint) =>
-      throw new UnimplementedError();
+  void drawRect(Rect rect, Paint paint) => throw new UnimplementedError();
 
   /// Draws a rounded rectangle with the given [Paint]. Whether the rectangle is
   /// filled or stroked (or both) is controlled by [Paint.style].
-  void drawRRect(RRect rrect, Paint paint) {
-    _drawRRect(rrect._value, paint);
-  }
-
-  void _drawRRect(Float32List rrect, Paint paint) =>
-      throw new UnimplementedError();
+  void drawRRect(RRect rrect, Paint paint) => throw new UnimplementedError();
 
   /// Draws a shape consisting of the difference between two rounded rectangles
   /// with the given [Paint]. Whether this shape is filled or stroked (or both)
   /// is controlled by [Paint.style].
   ///
   /// This shape is almost but not quite entirely unlike an annulus.
-  void drawDRRect(RRect outer, RRect inner, Paint paint) {
-    _drawDRRect(outer._value, inner._value, paint);
-  }
-
-  void _drawDRRect(Float32List outer, Float32List inner, Paint paint) =>
+  void drawDRRect(RRect outer, RRect inner, Paint paint) =>
       throw new UnimplementedError();
 
   /// Draws an axis-aligned oval that fills the given axis-aligned rectangle
   /// with the given [Paint]. Whether the oval is filled or stroked (or both) is
   /// controlled by [Paint.style].
-  void drawOval(Rect rect, Paint paint) {
-    _drawOval(rect.left, rect.top, rect.right, rect.bottom, paint);
-  }
-
-  void _drawOval(
-          double left, double top, double right, double bottom, Paint paint) =>
-      throw new UnimplementedError();
+  void drawOval(Rect rect, Paint paint) => throw new UnimplementedError();
 
   /// Draws a circle centered at the point given by the first two arguments and
   /// that has the radius given by the third argument, with the [Paint] given in
   /// the fourth argument. Whether the circle is filled or stroked (or both) is
   /// controlled by [Paint.style].
-  void drawCircle(Point c, double radius, Paint paint) {
-    _drawCircle(c.x, c.y, radius, paint);
-  }
-
-  void _drawCircle(double x, double y, double radius, Paint paint) =>
+  void drawCircle(Point c, double radius, Paint paint) =>
       throw new UnimplementedError();
 
   /// Draw an arc scaled to fit inside the given rectangle. It starts from
@@ -1250,31 +1104,17 @@ class Canvas {
   ///
   /// This method is optimized for drawing arcs and should be faster than [Path.arcTo].
   void drawArc(Rect rect, double startAngle, double sweepAngle, bool useCenter,
-      Paint paint) {
-    _drawArc(rect.left, rect.top, rect.right, rect.bottom, startAngle,
-        sweepAngle, useCenter, paint);
-  }
-
-  void _drawArc(double left, double top, double right, double bottom,
-          double startAngle, double sweepAngle, bool useCenter, Paint paint) =>
+          Paint paint) =>
       throw new UnimplementedError();
 
   /// Draws the given [Path] with the given [Paint]. Whether this shape is
   /// filled or stroked (or both) is controlled by [Paint.style]. If the path is
   /// filled, then subpaths within it are implicitly closed (see [Path.close]).
-  void drawPath(Path path, Paint paint) {
-    _drawPath(path, paint);
-  }
-
-  void _drawPath(Path path, Paint paint) => throw new UnimplementedError();
+  void drawPath(Path path, Paint paint) => throw new UnimplementedError();
 
   /// Draws the given [Image] into the canvas with its top-left corner at the
   /// given [Point]. The image is composited into the canvas using the given [Paint].
-  void drawImage(Image image, Point p, Paint paint) {
-    _drawImage(image, p.x, p.y, paint);
-  }
-
-  void _drawImage(Image image, double x, double y, Paint paint) =>
+  void drawImage(Image image, Point p, Paint paint) =>
       throw new UnimplementedError();
 
   /// Draws the subset of the given image described by the `src` argument into
@@ -1282,22 +1122,7 @@ class Canvas {
   ///
   /// This might sample from outside the `src` rect by up to half the width of
   /// an applied filter.
-  void drawImageRect(Image image, Rect src, Rect dst, Paint paint) {
-    _drawImageRect(image, src.left, src.top, src.right, src.bottom, dst.left,
-        dst.top, dst.right, dst.bottom, paint);
-  }
-
-  void _drawImageRect(
-          Image image,
-          double srcLeft,
-          double srcTop,
-          double srcRight,
-          double srcBottom,
-          double dstLeft,
-          double dstTop,
-          double dstRight,
-          double dstBottom,
-          Paint paint) =>
+  void drawImageRect(Image image, Rect src, Rect dst, Paint paint) =>
       throw new UnimplementedError();
 
   /// Draws the given [Image] into the canvas using the given [Paint].
@@ -1313,22 +1138,7 @@ class Canvas {
   /// five regions are drawn by stretching them to fit such that they exactly
   /// cover the destination rectangle while maintaining their relative
   /// positions.
-  void drawImageNine(Image image, Rect center, Rect dst, Paint paint) {
-    _drawImageNine(image, center.left, center.top, center.right, center.bottom,
-        dst.left, dst.top, dst.right, dst.bottom, paint);
-  }
-
-  void _drawImageNine(
-          Image image,
-          double centerLeft,
-          double centerTop,
-          double centerRight,
-          double centerBottom,
-          double dstLeft,
-          double dstTop,
-          double dstRight,
-          double dstBottom,
-          Paint paint) =>
+  void drawImageNine(Image image, Rect center, Rect dst, Paint paint) =>
       throw new UnimplementedError();
 
   /// Draw the given picture onto the canvas. To create a picture, see
@@ -1338,16 +1148,11 @@ class Canvas {
   /// Draws the text in the given paragraph into this canvas at the given offset.
   ///
   /// Valid only after [Paragraph.layout] has been called on the paragraph.
-  void drawParagraph(Paragraph paragraph, Offset offset) {
-    paragraph._paint(this, offset.dx, offset.dy);
-  }
+  void drawParagraph(Paragraph paragraph, Offset offset) =>
+      throw new UnimplementedError();
 
   /// Draws a sequence of points according to the given [PointMode].
-  void drawPoints(PointMode pointMode, List<Point> points, Paint paint) {
-    _drawPoints(paint, pointMode.index, _encodePointList(points));
-  }
-
-  void _drawPoints(Paint paint, int pointMode, Float32List points) =>
+  void drawPoints(PointMode pointMode, List<Point> points, Paint paint) =>
       throw new UnimplementedError();
 
   void drawVertices(
@@ -1367,27 +1172,8 @@ class Canvas {
     if (colors.isNotEmpty && colors.length != vertexCount)
       throw new ArgumentError("[vertices] and [colors] lengths must match");
 
-    final Float32List vertexBuffer = _encodePointList(vertices);
-    final Float32List textureCoordinateBuffer = textureCoordinates.isEmpty
-        ? null
-        : _encodePointList(textureCoordinates);
-    final Int32List colorBuffer =
-        colors.isEmpty ? null : _encodeColorList(colors);
-    final Int32List indexBuffer = new Int32List.fromList(indicies);
-
-    _drawVertices(paint, vertexMode.index, vertexBuffer,
-        textureCoordinateBuffer, colorBuffer, transferMode.index, indexBuffer);
+    throw new UnimplementedError();
   }
-
-  void _drawVertices(
-          Paint paint,
-          int vertexMode,
-          Float32List vertices,
-          Float32List textureCoordinates,
-          Int32List colors,
-          int transferMode,
-          Int32List indicies) =>
-      throw new UnimplementedError();
 
   // TODO(eseidel): Paint should be optional, but optional doesn't work.
   void drawAtlas(
@@ -1406,43 +1192,8 @@ class Canvas {
       throw new ArgumentError(
           "if supplied, [colors] length must match that of [transforms] and [rects]");
 
-    final Float32List rstTransformBuffer = new Float32List(rectCount * 4);
-    final Float32List rectBuffer = new Float32List(rectCount * 4);
-
-    for (int i = 0; i < rectCount; ++i) {
-      final int index0 = i * 4;
-      final int index1 = index0 + 1;
-      final int index2 = index0 + 2;
-      final int index3 = index0 + 3;
-      final RSTransform rstTransform = transforms[i];
-      final Rect rect = rects[i];
-      rstTransformBuffer[index0] = rstTransform.scos;
-      rstTransformBuffer[index1] = rstTransform.ssin;
-      rstTransformBuffer[index2] = rstTransform.tx;
-      rstTransformBuffer[index3] = rstTransform.ty;
-      rectBuffer[index0] = rect.left;
-      rectBuffer[index1] = rect.top;
-      rectBuffer[index2] = rect.right;
-      rectBuffer[index3] = rect.bottom;
-    }
-
-    final Int32List colorBuffer =
-        colors.isEmpty ? null : _encodeColorList(colors);
-    final Float32List cullRectBuffer = cullRect?._value;
-
-    _drawAtlas(paint, atlas, rstTransformBuffer, rectBuffer, colorBuffer,
-        transferMode.index, cullRectBuffer);
+    throw new UnimplementedError();
   }
-
-  void _drawAtlas(
-          Paint paint,
-          Image atlas,
-          Float32List rstTransforms,
-          Float32List rects,
-          Int32List colors,
-          int transferMode,
-          Float32List cullRect) =>
-      throw new UnimplementedError();
 }
 
 /// An object representing a sequence of recorded graphical operations.
@@ -1473,9 +1224,8 @@ class PictureRecorder {
   /// [Canvas] and begin recording, pass this [PictureRecorder] to the
   /// [Canvas] constructor.
   PictureRecorder() {
-    _constructor();
+    throw new UnimplementedError();
   }
-  void _constructor() => throw new UnimplementedError();
 
   /// Whether this object is currently recording commands.
   ///

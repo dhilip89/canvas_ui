@@ -689,12 +689,6 @@ abstract class Paragraph {
   /// Word boundaries are defined more precisely in Unicode Standard Annex #29
   /// http://www.unicode.org/reports/tr29/#Word_Boundaries
   List<int> getWordBoundary(int offset) => throw new UnimplementedError();
-
-  // Redirecting the paint function in this way solves some dependency problems
-  // in the C++ code. If we straighten out the C++ dependencies, we can remove
-  // this indirection.
-  void _paint(Canvas canvas, double x, double y) =>
-      throw new UnimplementedError();
 }
 
 /// Builds a [Paragraph] containing text with the given styling information.
