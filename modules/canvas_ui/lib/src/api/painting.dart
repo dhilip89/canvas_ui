@@ -258,11 +258,6 @@ enum PaintingStyle {
   stroke,
 }
 
-// If we actually run on big endian machines, we'll need to do something smarter
-// here. We don't use [Endianness.HOST_ENDIAN] because it's not a compile-time
-// constant and can't propagate into the set/get calls.
-const Endianness _kFakeHostEndian = Endianness.LITTLE_ENDIAN;
-
 /// A description of the style to use when drawing on a [Canvas].
 ///
 /// Most APIs on [Canvas] take a [Paint] object to describe the style
