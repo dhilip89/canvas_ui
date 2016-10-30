@@ -506,9 +506,8 @@ enum PathFillType {
 class Path {
   /// Create a new empty [Path] object.
   Path() {
-    _constructor();
+    throw new UnimplementedError();
   }
-  void _constructor() => throw new UnimplementedError();
 
   /// Determines how the interior of this path is calculated.
   PathFillType get fillType => PathFillType.values[_getFillType()];
