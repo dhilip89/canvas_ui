@@ -17,4 +17,3 @@ part './src/api/text.dart';
 part './src/api/window.dart';
 
 part './src/impl/web_hooks.dart';
-part './src/impl/paint_data.dart';
