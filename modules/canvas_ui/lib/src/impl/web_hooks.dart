@@ -1,5 +1,15 @@
 part of canvas_ui;
 
+String _decodeUTF8(ByteData message) {
+  return message != null
+      ? UTF8.decoder.convert(message.buffer.asUint8List())
+      : null;
+}
+
+dynamic _decodeJSON(String message) {
+  return message != null ? JSON.decode(message) : null;
+}
+
 class CanvasUI {
   _WebHooks _hooks;
 
@@ -29,9 +39,7 @@ class _WebHooks {
 
   _WebHooks(html.CanvasElement stage) {
     this.stage = stage;
-    context2d = this.stage.getContext('2d', {
-      'alpha':false
-    });
+    context2d = this.stage.getContext('2d', {'alpha': false});
 
     addHooks();
   }
@@ -53,18 +61,14 @@ class _WebHooks {
     updateLocale();
     localeSubscription =
         html.window.on['languagechange'].listen((html.Event event) {
-          updateLocale();
-        });
+      updateLocale();
+    });
 
     // semantics
     updateSemanticsEnabled(false);
 
-    // routes
-    pushRoute();
-
     // app visibility
-    visibilitySubscription =
-        html.document.onVisibilityChange.listen(onVisibilityChange);
+    visibilitySubscription = html.document.onVisibilityChange.listen(() {});
 
     // pointer events
     pointerCancelSubscription =
@@ -105,7 +109,7 @@ class _WebHooks {
     window
       .._devicePixelRatio = html.window.devicePixelRatio.toDouble()
       .._physicalSize =
-      new Size(stage.clientWidth.toDouble(), stage.clientHeight.toDouble())
+          new Size(stage.clientWidth.toDouble(), stage.clientHeight.toDouble())
       .._padding = WindowPadding.zero;
     if (window.onMetricsChanged != null) window.onMetricsChanged();
   }
@@ -120,7 +124,7 @@ class _WebHooks {
       language = parts[0];
       country = parts[1];
     } else if (html.window.navigator.languages[0] is String &&
-               html.window.navigator.languages[0].contains('-')) {
+        html.window.navigator.languages[0].contains('-')) {
       List<String> parts = html.window.navigator.languages[0].split('-');
       language = parts[0];
       country = parts[1];
@@ -139,20 +143,22 @@ class _WebHooks {
       window.onSemanticsEnabledChanged();
   }
 
-  void pushRoute() {
-    String path = html.window.location.pathname + html.window.location.search;
-
-    assert(window._defaultRouteName == null);
-    window._defaultRouteName = path;
-    // TODO(abarth): If we ever start calling _pushRoute other than before main,
-    // we should add a change notification callback.
-  }
-
-  void popRoute() {
-    if (window.onPopRoute != null) window.onPopRoute();
+  void _handleNavigationMessage(ByteData data) {
+    if (window._defaultRouteName != null) return;
+    try {
+      final dynamic message = _decodeJSON(_decodeUTF8(data));
+      final dynamic method = message['method'];
+      if (method != 'pushRoute') return;
+      final dynamic args = message['args'];
+      window._defaultRouteName = args[0];
+    } catch (e) {
+      // We ignore any exception and just let the message be dispatched as usual.
+    }
   }
 
   void dispatchPlatformMessage(String name, ByteData data, int responseId) {
+    if (name == 'flutter/navigation') _handleNavigationMessage(data);
+
     if (window.onPlatformMessage != null) {
       window.onPlatformMessage(name, data, (ByteData responseData) {
         respondToPlatformMessage(responseId, responseData);
@@ -175,14 +181,6 @@ class _WebHooks {
       window.onSemanticsAction(id, SemanticsAction.values[action]);
   }
 
-  void onVisibilityChange(html.Event event) {
-    bool visible = !html.document.hidden;
-    int state = visible ? 1 : 0;
-
-    if (window.onAppLifecycleStateChanged != null)
-      window.onAppLifecycleStateChanged(AppLifecycleState.values[state]);
-  }
-
   void onScheduleFrame() {
     html.window.requestAnimationFrame((num highResTime) {
       if (window.onBeginFrame != null)
@@ -190,9 +188,8 @@ class _WebHooks {
     });
   }
 
-  void onSendPlatformMessage(String name,
-                             PlatformMessageResponseCallback callback,
-                             ByteData data) {
+  void onSendPlatformMessage(
+      String name, PlatformMessageResponseCallback callback, ByteData data) {
     throw new UnimplementedError();
   }
 

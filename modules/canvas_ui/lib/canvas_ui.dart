@@ -4,6 +4,7 @@ import 'dart:html' as html;
 import 'dart:async';
 import 'dart:math' as math;
 import 'dart:typed_data';
+import 'dart:convert';
 
 part './src/api/compositing.dart';
 part './src/api/geometry.dart';
