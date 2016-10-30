@@ -504,17 +504,16 @@ enum PathFillType {
 /// Paths can be drawn on canvases using [Canvas.drawPath], and can
 /// used to create clip regions using [Canvas.clipPath].
 class Path {
+  PathFillType _fillType = PathFillType.winding;
+
   /// Create a new empty [Path] object.
   Path() {
     throw new UnimplementedError();
   }
 
   /// Determines how the interior of this path is calculated.
-  PathFillType get fillType => PathFillType.values[_getFillType()];
-  set fillType(PathFillType value) => _setFillType(value.index);
-
-  int _getFillType() => throw new UnimplementedError();
-  void _setFillType(int fillType) => throw new UnimplementedError();
+  PathFillType get fillType => _fillType;
+  set fillType(PathFillType value) => _fillType = value;
 
   /// Starts a new subpath at the given coordinate.
   void moveTo(double x, double y) => throw new UnimplementedError();
