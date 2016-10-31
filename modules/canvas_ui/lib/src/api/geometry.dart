@@ -1263,6 +1263,11 @@ class RRect {
 /// simple transformations than a full matrix.
 // Modeled after Skia's SkRSXform.
 class RSTransform {
+  double _scos = 0.0;
+  double _ssin = 0.0;
+  double _tx = 0.0;
+  double _ty = 0.0;
+
   /// Creates an RSTransform.
   ///
   /// An [RSTransform] expresses the combination of a translation, a rotation
@@ -1288,11 +1293,10 @@ class RSTransform {
   /// reused over multiple calls to this constructor, it may be more efficient
   /// to directly use this constructor instead.
   RSTransform(double scos, double ssin, double tx, double ty) {
-    _value
-      ..[0] = scos
-      ..[1] = ssin
-      ..[2] = tx
-      ..[3] = ty;
+    _scos = scos;
+    _ssin = ssin;
+    _tx = tx;
+    _ty = ty;
   }
 
   /// Creates an RSTransform from its individual components.
@@ -1328,21 +1332,19 @@ class RSTransform {
     return new RSTransform(scos, ssin, tx, ty);
   }
 
-  final Float32List _value = new Float32List(4);
-
   /// The cosine of the rotation multiplied by the scale factor.
-  double get scos => _value[0];
+  double get scos => _scos;
 
   /// The sine of the rotation multiplied by that same scale factor.
-  double get ssin => _value[1];
+  double get ssin => _ssin;
 
   /// The x coordinate of the translation, minus [scos] multiplied by the
   /// x-coordinate of the rotation point, plus [ssin] multiplied by the
   /// y-coordinate of the rotation point.
-  double get tx => _value[2];
+  double get tx => _tx;
 
   /// The y coordinate of the translation, minus [ssin] multiplied by the
   /// x-coordinate of the rotation point, minus [scos] multiplied by the
   /// y-coordinate of the rotation point.
-  double get ty => _value[3];
+  double get ty => _ty;
 }
