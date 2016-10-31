@@ -512,31 +512,29 @@ enum PathFillType {
 ///
 /// Paths can be drawn on canvases using [Canvas.drawPath], and can
 /// used to create clip regions using [Canvas.clipPath].
-class Path {
-  PathFillType _fillType = PathFillType.winding;
-
+abstract class Path {
   /// Create a new empty [Path] object.
-  Path() {
-    throw new UnimplementedError();
+  factory Path() {
+    return new _Path();
   }
 
   /// Determines how the interior of this path is calculated.
-  PathFillType get fillType => _fillType;
-  set fillType(PathFillType value) => _fillType = value;
+  PathFillType get fillType;
+  set fillType(PathFillType value);
 
   /// Starts a new subpath at the given coordinate.
-  void moveTo(double x, double y) => throw new UnimplementedError();
+  void moveTo(double x, double y);
 
   /// Starts a new subpath at the given offset from the current point.
-  void relativeMoveTo(double dx, double dy) => throw new UnimplementedError();
+  void relativeMoveTo(double dx, double dy);
 
   /// Adds a straight line segment from the current point to the given
   /// point.
-  void lineTo(double x, double y) => throw new UnimplementedError();
+  void lineTo(double x, double y);
 
   /// Adds a straight line segment from the current point to the point
   /// at the given offset from the current point.
-  void relativeLineTo(double dx, double dy) => throw new UnimplementedError();
+  void relativeLineTo(double dx, double dy);
 
   /// Adds a quadratic bezier segment that curves from the current
   /// point to the given point (x2,y2), using the control point

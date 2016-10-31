@@ -16,4 +16,5 @@ part './src/api/semantics.dart';
 part './src/api/text.dart';
 part './src/api/window.dart';
 
+part './src/impl/path.dart';
 part './src/impl/web_hooks.dart';
