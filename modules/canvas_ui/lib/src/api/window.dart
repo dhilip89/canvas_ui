@@ -220,11 +220,6 @@ class Window {
   /// message, `callback` will be called with the response.
   void sendPlatformMessage(
       String name, ByteData data, PlatformMessageResponseCallback callback) {
-    _sendPlatformMessage(name, callback, data);
-  }
-
-  void _sendPlatformMessage(
-      String name, PlatformMessageResponseCallback callback, ByteData data) {
     _sendPlatformMessageHook(name, callback, data);
   }
 
