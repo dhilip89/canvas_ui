@@ -83,7 +83,6 @@ class Locale {
   final String countryCode;
 
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! Locale) return false;
     final Locale typedOther = other;
     return languageCode == typedOther.languageCode &&

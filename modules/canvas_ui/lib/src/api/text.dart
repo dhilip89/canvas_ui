@@ -143,7 +143,6 @@ class TextDecoration {
   static const TextDecoration lineThrough = const TextDecoration._(0x4);
 
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! TextDecoration) return false;
     final TextDecoration typedOther = other;
     return _mask == typedOther._mask;
@@ -326,7 +325,6 @@ class TextStyle {
   final double _height;
 
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! TextStyle) return false;
     final TextStyle typedOther = other;
     if (_fontFamily != typedOther._fontFamily ||
@@ -460,7 +458,6 @@ class ParagraphStyle {
   final String _ellipsis;
 
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! ParagraphStyle) return false;
     final ParagraphStyle typedOther = other;
     if (_fontFamily != typedOther._fontFamily ||
@@ -535,7 +532,6 @@ class TextBox {
   }
 
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! TextBox) return false;
     final TextBox typedOther = other;
     return typedOther.left == left &&

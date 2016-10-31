@@ -662,7 +662,6 @@ class Rect {
 
   @override
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! Rect) return false;
     final Rect typedOther = other;
     if (_left != typedOther._left ||
@@ -715,7 +714,6 @@ class Radius {
 
   @override
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! Radius) return false;
     final Radius typedOther = other;
     return typedOther.x == x && typedOther.y == y;
@@ -1213,7 +1211,6 @@ class RRect {
 
   @override
   bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
     if (other is! RRect) return false;
     final RRect typedOther = other;
     if (_left != typedOther._left ||
