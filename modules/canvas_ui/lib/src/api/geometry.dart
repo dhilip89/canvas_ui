@@ -485,61 +485,54 @@ class Point {
 /// An immutable 2D, axis-aligned, floating-point rectangle whose coordinates
 /// are relative to an origin point.
 class Rect {
+  double _left = 0.0;
+  double _top = 0.0;
+  double _right = 0.0;
+  double _bottom = 0.0;
+
   Rect._();
 
   /// Construct a rectangle from its left, top, right, and bottom edges.
-  Rect.fromLTRB(double left, double top, double right, double bottom) {
-    _value
-      ..[0] = left
-      ..[1] = top
-      ..[2] = right
-      ..[3] = bottom;
-  }
+  Rect.fromLTRB(this._left, this._top, this._right, this._bottom);
 
   /// Construct a rectangle from its left and top edges, its width, and its height.
   ///
   /// To construct a [Rect] from a [Point] or [Offset] and a [Size], you can use
   /// the rectangle constructor operator `&`. See [Point.&] and [Offset.&].
   Rect.fromLTWH(double left, double top, double width, double height) {
-    _value
-      ..[0] = left
-      ..[1] = top
-      ..[2] = left + width
-      ..[3] = top + height;
+    _left = left;
+    _top = top;
+    _right = left + width;
+    _bottom = top + height;
   }
 
   /// Construct a rectangle that bounds the given circle.
   Rect.fromCircle({Point center, double radius}) {
-    _value
-      ..[0] = center.x - radius
-      ..[1] = center.y - radius
-      ..[2] = center.x + radius
-      ..[3] = center.y + radius;
+    _left = center.x - radius;
+    _top = center.y - radius;
+    _right = center.x + radius;
+    _bottom = center.y + radius;
   }
 
   /// Construct the smallest rectangle that encloses the given points.
   Rect.fromPoints(Point a, Point b) {
-    _value
-      ..[0] = math.min(a.x, b.x)
-      ..[1] = math.min(a.y, b.y)
-      ..[2] = math.max(a.x, b.x)
-      ..[3] = math.max(a.y, b.y);
+    _left = math.min(a.x, b.x);
+    _top = math.min(a.y, b.y);
+    _right = math.max(a.x, b.x);
+    _bottom = math.max(a.y, b.y);
   }
 
-  static const int _kDataSize = 4;
-  final Float32List _value = new Float32List(_kDataSize);
-
   /// The offset of the left edge of this rectangle from the x axis.
-  double get left => _value[0];
+  double get left => _left;
 
   /// The offset of the top edge of this rectangle from the y axis.
-  double get top => _value[1];
+  double get top => _top;
 
   /// The offset of the right edge of this rectangle from the x axis.
-  double get right => _value[2];
+  double get right => _right;
 
   /// The offset of the bottom edge of this rectangle from the y axis.
-  double get bottom => _value[3];
+  double get bottom => _bottom;
 
   /// A rectangle with left, top, right, and bottom edges all at zero.
   static final Rect zero = new Rect._();
@@ -672,14 +665,15 @@ class Rect {
     if (identical(this, other)) return true;
     if (other is! Rect) return false;
     final Rect typedOther = other;
-    for (int i = 0; i < _kDataSize; i += 1) {
-      if (_value[i] != typedOther._value[i]) return false;
-    }
+    if (_left != typedOther._left ||
+        _top != typedOther._top ||
+        _right != typedOther._right ||
+        _bottom != typedOther._bottom) return false;
     return true;
   }
 
   @override
-  int get hashCode => hashList(_value);
+  int get hashCode => hashList(<double>[_left, _top, _right, _bottom]);
 
   @override
   String toString() =>
