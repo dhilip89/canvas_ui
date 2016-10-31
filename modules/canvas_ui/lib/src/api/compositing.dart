@@ -33,9 +33,8 @@ class Scene {
 class SceneBuilder {
   /// Creates an empty [SceneBuilder] object.
   SceneBuilder() {
-    _constructor();
+    throw new UnimplementedError();
   }
-  void _constructor() => throw new UnimplementedError();
 
   /// Pushes a transform operation onto the operation stack.
   ///
@@ -47,30 +46,23 @@ class SceneBuilder {
       throw new ArgumentError("[matrix4] argument cannot be null");
     if (matrix4.length != 16)
       throw new ArgumentError("[matrix4] must have 16 entries.");
-    _pushTransform(matrix4);
-  }
 
-  void _pushTransform(Float64List matrix4) => throw new UnimplementedError();
+    throw new UnimplementedError();
+  }
 
   /// Pushes a rectangular clip operation onto the operation stack.
   ///
   /// Rasterization outside the given rectangle is discarded.
   ///
   /// See [pop] for details about the operation stack.
-  void pushClipRect(Rect rect) {
-    _pushClipRect(rect.left, rect.right, rect.top, rect.bottom);
-  }
-
-  void _pushClipRect(double left, double right, double top, double bottom) =>
-      throw new UnimplementedError();
+  void pushClipRect(Rect rect) => throw new UnimplementedError();
 
   /// Pushes a rounded-rectangular clip operation onto the operation stack.
   ///
   /// Rasterization outside the given rounded rectangle is discarded.
   ///
   /// See [pop] for details about the operation stack.
-  void pushClipRRect(RRect rrect) => _pushClipRRect(rrect._value);
-  void _pushClipRRect(Float32List rrect) => throw new UnimplementedError();
+  void pushClipRRect(RRect rrect) => throw new UnimplementedError();
 
   /// Pushes a path clip operation onto the operation stack.
   ///
@@ -95,11 +87,7 @@ class SceneBuilder {
   /// transfer mode.
   ///
   /// See [pop] for details about the operation stack.
-  void pushColorFilter(Color color, TransferMode transferMode) {
-    _pushColorFilter(color.value, transferMode.index);
-  }
-
-  void _pushColorFilter(int color, int transferMode) =>
+  void pushColorFilter(Color color, TransferMode transferMode) =>
       throw new UnimplementedError();
 
   /// Pushes a backdrop filter operation onto the operation stack.
@@ -116,13 +104,8 @@ class SceneBuilder {
   /// rectangle using the given transfer mode.
   ///
   /// See [pop] for details about the operation stack.
-  void pushShaderMask(Shader shader, Rect maskRect, TransferMode transferMode) {
-    _pushShaderMask(shader, maskRect.left, maskRect.right, maskRect.top,
-        maskRect.bottom, transferMode.index);
-  }
-
-  void _pushShaderMask(Shader shader, double maskRectLeft, double maskRectRight,
-          double maskRectTop, double maskRectBottom, int transferMode) =>
+  void pushShaderMask(
+          Shader shader, Rect maskRect, TransferMode transferMode) =>
       throw new UnimplementedError();
 
   /// Ends the effect of the most recently pushed operation.
@@ -156,14 +139,7 @@ class SceneBuilder {
   ///
   /// See also the [PerformanceOverlayOption] enum in the rendering library.
   /// for more details.
-  // Values above must match constants in //engine/src/sky/compositor/performance_overlay_layer.h
-  void addPerformanceOverlay(int enabledOptions, Rect bounds) {
-    _addPerformanceOverlay(
-        enabledOptions, bounds.left, bounds.right, bounds.top, bounds.bottom);
-  }
-
-  void _addPerformanceOverlay(int enabledOptions, double left, double right,
-          double top, double bottom) =>
+  void addPerformanceOverlay(int enabledOptions, Rect bounds) =>
       throw new UnimplementedError();
 
   /// Adds a [Picture] to the scene.
@@ -174,11 +150,8 @@ class SceneBuilder {
     int hints = 0;
     if (isComplexHint) hints |= 1;
     if (willChangeHint) hints |= 2;
-    _addPicture(offset.dx, offset.dy, picture, hints);
+    throw new UnimplementedError();
   }
-
-  void _addPicture(double dx, double dy, Picture picture, int hints) =>
-      throw new UnimplementedError();
 
   /// (Fuchsia-only) Adds a scene rendered by another application to the scene
   /// for this application.
@@ -187,13 +160,7 @@ class SceneBuilder {
   /// the Fuchsia view manager, but this function is agnostic as to the source
   /// of scene token.
   void addChildScene(Offset offset, double devicePixelRatio, int physicalWidth,
-      int physicalHeight, int sceneToken) {
-    _addChildScene(offset.dx, offset.dy, devicePixelRatio, physicalWidth,
-        physicalHeight, sceneToken);
-  }
-
-  void _addChildScene(double dx, double dy, double devicePixelRatio,
-          int physicalWidth, int physicalHeight, int sceneToken) =>
+          int physicalHeight, int sceneToken) =>
       throw new UnimplementedError();
 
   /// Sets a threshold after which additional debugging information should be recorded.
