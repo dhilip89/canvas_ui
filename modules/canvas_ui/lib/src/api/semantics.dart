@@ -169,9 +169,8 @@ class SemanticsFlags {
 class SemanticsUpdateBuilder {
   /// Creates an empty [SemanticsUpdateBuilder] object.
   SemanticsUpdateBuilder() {
-    _constructor();
+    throw new UnimplementedError();
   }
-  void _constructor() => throw new UnimplementedError();
 
   /// Update the information associated with the node with the given `id`.
   ///
@@ -208,22 +207,8 @@ class SemanticsUpdateBuilder {
       Int32List children}) {
     if (transform.length != 16)
       throw new ArgumentError("[transform] must have 16 entries.");
-    _updateNode(id, flags, actions, rect.left, rect.top, rect.right,
-        rect.bottom, label, transform, children);
+    throw new UnimplementedError();
   }
-
-  void _updateNode(
-          int id,
-          int flags,
-          int actions,
-          double left,
-          double top,
-          double right,
-          double bottom,
-          String label,
-          Float64List transform,
-          Int32List children) =>
-      throw new UnimplementedError();
 
   /// Creates a [SemanticsUpdate] object that encapsulates the updates recorded
   /// by this object.
