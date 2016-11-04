@@ -40,6 +40,16 @@ class _CubicBezierToCommand extends _PathCommand {
       this._c1X, this._c1Y, this._c2X, this._c2Y, this._x, this._y);
 }
 
+class _RectCommand extends _PathCommand {
+  double _x;
+  double _y;
+
+  double _width;
+  double _height;
+
+  _RectCommand(this._x, this._y, this._width, this._height);
+}
+
 class _Path implements Path {
   PathFillType _fillType = PathFillType.winding;
 
@@ -111,14 +121,15 @@ class _Path implements Path {
   }
 
   void arcTo(
-          Rect rect, double startAngle, double sweepAngle, bool forceMoveTo) =>
-      throw new UnimplementedError();
+      Rect rect, double startAngle, double sweepAngle, bool forceMoveTo) {
+    throw new UnimplementedError();
+  }
 
   void addRect(Rect rect) {
-    moveTo(rect.left, rect.top);
-    lineTo(rect.right, rect.top);
-    lineTo(rect.right, rect.bottom);
-    lineTo(rect.left, rect.bottom);
-    //TODO: close
+    _posX = rect.left;
+    _posY = rect.top;
+
+    _commands
+        .add(new _RectCommand(rect.left, rect.top, rect.width, rect.height));
   }
 }
