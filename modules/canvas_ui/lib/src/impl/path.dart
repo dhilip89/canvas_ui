@@ -109,4 +109,16 @@ class _Path implements Path {
   void relativeConicTo(double x1, double y1, double x2, double y2, double w) {
     conicTo(_posX + x1, _posY + y1, _posX + x2, _posY + y2, w);
   }
+
+  void arcTo(
+          Rect rect, double startAngle, double sweepAngle, bool forceMoveTo) =>
+      throw new UnimplementedError();
+
+  void addRect(Rect rect) {
+    moveTo(rect.left, rect.top);
+    lineTo(rect.right, rect.top);
+    lineTo(rect.right, rect.bottom);
+    lineTo(rect.left, rect.bottom);
+    //TODO: close
+  }
 }

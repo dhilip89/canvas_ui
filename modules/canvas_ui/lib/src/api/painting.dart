@@ -589,13 +589,11 @@ abstract class Path {
   ///
   /// The line segment added if [forceMoveTo] is false starts at the
   /// current point and ends at the start of the arc.
-  void arcTo(
-          Rect rect, double startAngle, double sweepAngle, bool forceMoveTo) =>
-      throw new UnimplementedError();
+  void arcTo(Rect rect, double startAngle, double sweepAngle, bool forceMoveTo);
 
   /// Adds a new subpath that consists of four lines that outline the
   /// given rectangle.
-  void addRect(Rect rect) => throw new UnimplementedError();
+  void addRect(Rect rect);
 
   /// Adds a new subpath that consists of a curve that forms the
   /// ellipse that fills the given rectangle.
