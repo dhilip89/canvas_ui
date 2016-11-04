@@ -514,9 +514,7 @@ enum PathFillType {
 /// used to create clip regions using [Canvas.clipPath].
 abstract class Path {
   /// Create a new empty [Path] object.
-  factory Path() {
-    return new _Path();
-  }
+  factory Path() => new _Path();
 
   /// Determines how the interior of this path is calculated.
   PathFillType get fillType;
@@ -539,15 +537,13 @@ abstract class Path {
   /// Adds a quadratic bezier segment that curves from the current
   /// point to the given point (x2,y2), using the control point
   /// (x1,y1).
-  void quadraticBezierTo(double x1, double y1, double x2, double y2) =>
-      throw new UnimplementedError();
+  void quadraticBezierTo(double x1, double y1, double x2, double y2);
 
   /// Adds a quadratic bezier segment that curves from the current
   /// point to the point at the offset (x2,y2) from the current point,
   /// using the control point at the offset (x1,y1) from the current
   /// point.
-  void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2) =>
-      throw new UnimplementedError();
+  void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2);
 
   /// Adds a cubic bezier segment that curves from the current point
   /// to the given point (x3,y3), using the control points (x1,y1) and

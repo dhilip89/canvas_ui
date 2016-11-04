@@ -16,6 +16,16 @@ class _LineToCommand extends _PathCommand {
   _LineToCommand(this._x, this._y);
 }
 
+class _QuadraticBezierToCommand extends _PathCommand {
+  double _controlX;
+  double _controlY;
+
+  double _x;
+  double _y;
+
+  _QuadraticBezierToCommand(this._controlX, this._controlY, this._x, this._y);
+}
+
 class _Path implements Path {
   PathFillType _fillType = PathFillType.winding;
 
@@ -27,6 +37,7 @@ class _Path implements Path {
   _Path() {}
 
   PathFillType get fillType => _fillType;
+
   set fillType(PathFillType value) => _fillType = value;
 
   void moveTo(double x, double y) {
@@ -55,5 +66,23 @@ class _Path implements Path {
     _posY += dy;
 
     _commands.add(new _LineToCommand(_posX, _posY));
+  }
+
+  void quadraticBezierTo(double x1, double y1, double x2, double y2) {
+    _posX = x2;
+    _posY = y2;
+
+    _commands.add(new _QuadraticBezierToCommand(x1, y1, _posX, _posY));
+  }
+
+  void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2) {
+    double controlX = _posX + x1;
+    double controlY = _posY + y1;
+
+    _posX += x2;
+    _posY += y2;
+
+    _commands
+        .add(new _QuadraticBezierToCommand(controlX, controlY, _posX, _posY));
   }
 }
