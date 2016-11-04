@@ -62,10 +62,7 @@ class _Path implements Path {
   }
 
   void relativeMoveTo(double dx, double dy) {
-    _posX += dx;
-    _posY += dy;
-
-    _commands.add(new _MoveToCommand(_posX, _posY));
+    moveTo(_posX + dx, _posY + dy);
   }
 
   void lineTo(double x, double y) {
@@ -76,10 +73,7 @@ class _Path implements Path {
   }
 
   void relativeLineTo(double dx, double dy) {
-    _posX += dx;
-    _posY += dy;
-
-    _commands.add(new _LineToCommand(_posX, _posY));
+    lineTo(_posX + dx, _posY + dy);
   }
 
   void quadraticBezierTo(double x1, double y1, double x2, double y2) {
@@ -90,13 +84,7 @@ class _Path implements Path {
   }
 
   void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2) {
-    double cX = _posX + x1;
-    double cY = _posY + y1;
-
-    _posX += x2;
-    _posY += y2;
-
-    _commands.add(new _QuadraticBezierToCommand(cX, cY, _posX, _posY));
+    quadraticBezierTo(_posX + x1, _posY + y1, _posX + x2, _posY + y2);
   }
 
   void cubicTo(
@@ -109,14 +97,9 @@ class _Path implements Path {
 
   void relativeCubicTo(
       double x1, double y1, double x2, double y2, double x3, double y3) {
-    double c1X = _posX + x1;
-    double c1Y = _posY + y1;
-
-    double c2X = _posX + x2;
-    double c2Y = _posY + y2;
-
-    _posX += x3;
-    _posY += y3;
+    cubicTo(
+        _posX + x1, _posY + y1, _posX + x2, _posY + y2, _posX + x3, _posY + y3);
+  }
 
     _commands.add(new _CubicBezierToCommand(c1X, c1Y, c2X, c2Y, _posX, _posY));
   }
