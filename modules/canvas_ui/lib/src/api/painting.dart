@@ -563,8 +563,7 @@ abstract class Path {
   /// weight w. If the weight is greater than 1, then the curve is a
   /// hyperbola; if the weight equals 1, it's a parabola; and if it is
   /// less than 1, it is an ellipse.
-  void conicTo(double x1, double y1, double x2, double y2, double w) =>
-      throw new UnimplementedError();
+  void conicTo(double x1, double y1, double x2, double y2, double w);
 
   /// Adds a bezier segment that curves from the current point to the
   /// point at the offset (x2,y2) from the current point, using the
@@ -572,8 +571,7 @@ abstract class Path {
   /// the weight w. If the weight is greater than 1, then the curve is
   /// a hyperbola; if the weight equals 1, it's a parabola; and if it
   /// is less than 1, it is an ellipse.
-  void relativeConicTo(double x1, double y1, double x2, double y2, double w) =>
-      throw new UnimplementedError();
+  void relativeConicTo(double x1, double y1, double x2, double y2, double w);
 
   /// If the [forceMoveTo] argument is false, adds a straight line
   /// segment and an arc segment.

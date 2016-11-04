@@ -101,6 +101,12 @@ class _Path implements Path {
         _posX + x1, _posY + y1, _posX + x2, _posY + y2, _posX + x3, _posY + y3);
   }
 
-    _commands.add(new _CubicBezierToCommand(c1X, c1Y, c2X, c2Y, _posX, _posY));
+  void conicTo(double x1, double y1, double x2, double y2, double w) {
+    //TODO: https://github.com/google/skia/blob/bdabcc4cb873dc4de39263c995900a05e6a32cf4/src/core/SkPath.cpp#L791
+    throw new UnimplementedError();
+  }
+
+  void relativeConicTo(double x1, double y1, double x2, double y2, double w) {
+    conicTo(_posX + x1, _posY + y1, _posX + x2, _posY + y2, w);
   }
 }
