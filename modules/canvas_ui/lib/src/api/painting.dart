@@ -549,16 +549,14 @@ abstract class Path {
   /// to the given point (x3,y3), using the control points (x1,y1) and
   /// (x2,y2).
   void cubicTo(
-          double x1, double y1, double x2, double y2, double x3, double y3) =>
-      throw new UnimplementedError();
+      double x1, double y1, double x2, double y2, double x3, double y3);
 
   /// Adds a cubcic bezier segment that curves from the current point
   /// to the point at the offset (x3,y3) from the current point, using
   /// the control points at the offsets (x1,y1) and (x2,y2) from the
   /// current point.
   void relativeCubicTo(
-          double x1, double y1, double x2, double y2, double x3, double y3) =>
-      throw new UnimplementedError();
+      double x1, double y1, double x2, double y2, double x3, double y3);
 
   /// Adds a bezier segment that curves from the current point to the
   /// given point (x2,y2), using the control points (x1,y1) and the

@@ -26,6 +26,20 @@ class _QuadraticBezierToCommand extends _PathCommand {
   _QuadraticBezierToCommand(this._cX, this._cY, this._x, this._y);
 }
 
+class _CubicBezierToCommand extends _PathCommand {
+  double _c1X;
+  double _c1Y;
+
+  double _c2X;
+  double _c2Y;
+
+  double _x;
+  double _y;
+
+  _CubicBezierToCommand(
+      this._c1X, this._c1Y, this._c2X, this._c2Y, this._x, this._y);
+}
+
 class _Path implements Path {
   PathFillType _fillType = PathFillType.winding;
 
@@ -83,5 +97,27 @@ class _Path implements Path {
     _posY += y2;
 
     _commands.add(new _QuadraticBezierToCommand(cX, cY, _posX, _posY));
+  }
+
+  void cubicTo(
+      double x1, double y1, double x2, double y2, double x3, double y3) {
+    _posX = x3;
+    _posY = y3;
+
+    _commands.add(new _CubicBezierToCommand(x1, y1, x2, y2, _posX, _posY));
+  }
+
+  void relativeCubicTo(
+      double x1, double y1, double x2, double y2, double x3, double y3) {
+    double c1X = _posX + x1;
+    double c1Y = _posY + y1;
+
+    double c2X = _posX + x2;
+    double c2Y = _posY + y2;
+
+    _posX += x3;
+    _posY += y3;
+
+    _commands.add(new _CubicBezierToCommand(c1X, c1Y, c2X, c2Y, _posX, _posY));
   }
 }
