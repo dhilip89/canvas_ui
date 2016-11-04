@@ -17,13 +17,13 @@ class _LineToCommand extends _PathCommand {
 }
 
 class _QuadraticBezierToCommand extends _PathCommand {
-  double _controlX;
-  double _controlY;
+  double _cX;
+  double _cY;
 
   double _x;
   double _y;
 
-  _QuadraticBezierToCommand(this._controlX, this._controlY, this._x, this._y);
+  _QuadraticBezierToCommand(this._cX, this._cY, this._x, this._y);
 }
 
 class _Path implements Path {
@@ -76,13 +76,12 @@ class _Path implements Path {
   }
 
   void relativeQuadraticBezierTo(double x1, double y1, double x2, double y2) {
-    double controlX = _posX + x1;
-    double controlY = _posY + y1;
+    double cX = _posX + x1;
+    double cY = _posY + y1;
 
     _posX += x2;
     _posY += y2;
 
-    _commands
-        .add(new _QuadraticBezierToCommand(controlX, controlY, _posX, _posY));
+    _commands.add(new _QuadraticBezierToCommand(cX, cY, _posX, _posY));
   }
 }
