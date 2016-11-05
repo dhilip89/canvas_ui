@@ -2,6 +2,7 @@ part of canvas_ui;
 
 abstract class _PathCommand {}
 
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo
 class _MoveToCommand extends _PathCommand {
   double _x;
   double _y;
@@ -9,6 +10,7 @@ class _MoveToCommand extends _PathCommand {
   _MoveToCommand(this._x, this._y);
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
 class _LineToCommand extends _PathCommand {
   double _x;
   double _y;
@@ -16,30 +18,33 @@ class _LineToCommand extends _PathCommand {
   _LineToCommand(this._x, this._y);
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
 class _QuadraticBezierToCommand extends _PathCommand {
-  double _cX;
-  double _cY;
+  double _cpx;
+  double _cpy;
 
   double _x;
   double _y;
 
-  _QuadraticBezierToCommand(this._cX, this._cY, this._x, this._y);
+  _QuadraticBezierToCommand(this._cpx, this._cpy, this._x, this._y);
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
 class _CubicBezierToCommand extends _PathCommand {
-  double _c1X;
-  double _c1Y;
+  double _cp1x;
+  double _cp1y;
 
-  double _c2X;
-  double _c2Y;
+  double _cp2x;
+  double _cp2y;
 
   double _x;
   double _y;
 
   _CubicBezierToCommand(
-      this._c1X, this._c1Y, this._c2X, this._c2Y, this._x, this._y);
+      this._cp1x, this._cp1y, this._cp2x, this._cp2y, this._x, this._y);
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rect
 class _RectCommand extends _PathCommand {
   double _x;
   double _y;
