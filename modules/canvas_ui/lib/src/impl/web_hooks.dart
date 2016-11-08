@@ -10,10 +10,21 @@ dynamic _decodeJSON(String message) {
   return message != null ? JSON.decode(message) : null;
 }
 
-class CanvasUI {
+_CanvasUI _canvasUI = null;
+
+void initCanvasUI(html.CanvasElement stage) {
+  _canvasUI = new _CanvasUI(stage);
+}
+
+void disposeCanvasUI() {
+  _canvasUI.dispose();
+  _canvasUI = null;
+}
+
+class _CanvasUI {
   _WebHooks _hooks;
 
-  CanvasUI(html.CanvasElement stage) : _hooks = new _WebHooks(stage);
+  _CanvasUI(html.CanvasElement stage) : _hooks = new _WebHooks(stage);
 
   void dispose() {
     _hooks.dispose();
